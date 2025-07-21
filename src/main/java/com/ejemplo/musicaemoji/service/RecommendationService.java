@@ -81,18 +81,90 @@ public class RecommendationService {
         List<String> songs = new ArrayList<>();
         Map<String, List<String>> genreSamples = new HashMap<>();
 
-        // Canciones de Pop (2)
-        genreSamples.put("Pop", Arrays.asList("Song A - Artist 1 (Pop)", "Song B - Artist 2 (Pop)"));
-        // Canciones de Rock (2)
-        genreSamples.put("Rock", Arrays.asList("Song C - Artist 3 (Rock)", "Song D - Artist 4 (Rock)"));
-        // Canciones de Dance (1)
-        genreSamples.put("Dance", Collections.singletonList("Song E - Artist 5 (Dance)"));
-        // Canciones de Blues (1)
-        genreSamples.put("Blues", Collections.singletonList("Song F - Artist 6 (Blues)"));
-        // Canciones de Hip Hop (1)
-        genreSamples.put("Hip Hop", Collections.singletonList("Song G - Artist 7 (Hip Hop)"));
-        // Canciones de Indie (1)
-        genreSamples.put("Indie", Collections.singletonList("Song J - Artist 10 (Indie)"));
+        // Canciones de Pop (10 ejemplos)
+        genreSamples.put("Pop", Arrays.asList(
+            "Blinding Lights - The Weeknd (Pop)",
+            "Shape of You - Ed Sheeran (Pop)",
+            "Uptown Funk - Mark Ronson ft. Bruno Mars (Pop)",
+            "Bad Guy - Billie Eilish (Pop)",
+            "Despacito - Luis Fonsi ft. Daddy Yankee (Pop)",
+            "Dance Monkey - Tones and I (Pop)",
+            "Rolling in the Deep - Adele (Pop)",
+            "Happy - Pharrell Williams (Pop)",
+            "Old Town Road - Lil Nas X ft. Billy Ray Cyrus (Pop)",
+            "Levitating - Dua Lipa (Pop)"
+        ));
+
+        // Canciones de Rock (10 ejemplos)
+        genreSamples.put("Rock", Arrays.asList(
+            "Bohemian Rhapsody - Queen (Rock)",
+            "Stairway to Heaven - Led Zeppelin (Rock)",
+            "Smells Like Teen Spirit - Nirvana (Rock)",
+            "Sweet Child o' Mine - Guns N' Roses (Rock)",
+            "Hotel California - Eagles (Rock)",
+            "Livin' on a Prayer - Bon Jovi (Rock)",
+            "Thunderstruck - AC/DC (Rock)",
+            "Seven Nation Army - The White Stripes (Rock)",
+            "Wonderwall - Oasis (Rock)",
+            "Dream On - Aerosmith (Rock)"
+        ));
+
+        // Canciones de Dance (10 ejemplos)
+        genreSamples.put("Dance", Arrays.asList(
+            "Titanium - David Guetta ft. Sia (Dance)",
+            "Wake Me Up - Avicii (Dance)",
+            "Levels - Avicii (Dance)",
+            "Lean On - Major Lazer & DJ Snake ft. MØ (Dance)",
+            "Where Are Ü Now - Skrillex & Diplo ft. Justin Bieber (Dance)",
+            "One Kiss - Calvin Harris & Dua Lipa (Dance)",
+            "The Nights - Avicii (Dance)",
+            "Don't You Worry Child - Swedish House Mafia ft. John Martin (Dance)",
+            "I Gotta Feeling - The Black Eyed Peas (Dance)",
+            "Closer - The Chainsmokers ft. Halsey (Dance)"
+        ));
+
+        // Canciones de Blues (10 ejemplos)
+        genreSamples.put("Blues", Arrays.asList(
+            "The Thrill Is Gone - B.B. King (Blues)",
+            "Cross Road Blues - Robert Johnson (Blues)",
+            "Sweet Home Chicago - Robert Johnson (Blues)",
+            "Mannish Boy - Muddy Waters (Blues)",
+            "Boom Boom - John Lee Hooker (Blues)",
+            "Pride and Joy - Stevie Ray Vaughan (Blues)",
+            "Red House - Jimi Hendrix (Blues)",
+            "Born Under a Bad Sign - Albert King (Blues)",
+            "Hoochie Coochie Man - Muddy Waters (Blues)",
+            "Stormy Monday - T-Bone Walker (Blues)"
+        ));
+
+        // Canciones de Hip Hop (10 ejemplos)
+        genreSamples.put("Hip Hop", Arrays.asList(
+            "Lose Yourself - Eminem (Hip Hop)",
+            "Still D.R.E. - Dr. Dre ft. Snoop Dogg (Hip Hop)",
+            "N.Y. State of Mind - Nas (Hip Hop)",
+            "California Love - 2Pac ft. Dr. Dre (Hip Hop)",
+            "In Da Club - 50 Cent (Hip Hop)",
+            "Hotline Bling - Drake (Hip Hop)",
+            "God's Plan - Drake (Hip Hop)",
+            "Sicko Mode - Travis Scott (Hip Hop)",
+            "Mo Bamba - Sheck Wes (Hip Hop)",
+            "Old Town Road - Lil Nas X (Hip Hop)" // Puede aparecer en Pop también
+        ));
+
+        // Canciones de Indie (10 ejemplos)
+        genreSamples.put("Indie", Arrays.asList(
+            "Do I Wanna Know? - Arctic Monkeys (Indie)",
+            "R U Mine? - Arctic Monkeys (Indie)",
+            "Chasing Cars - Snow Patrol (Indie)",
+            "Ho Hey - The Lumineers (Indie)",
+            "Little Talks - Of Monsters and Men (Indie)",
+            "Pumped Up Kicks - Foster the People (Indie)",
+            "Sweater Weather - The Neighbourhood (Indie)",
+            "Take Me Out - Franz Ferdinand (Indie)",
+            "Mr. Brightside - The Killers (Indie)",
+            "Somebody That I Used to Know - Gotye ft. Kimbra (Indie)"
+        ));
+
         // Puedes añadir más géneros y canciones aquí
 
         for (String genre : genres) {
