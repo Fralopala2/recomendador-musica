@@ -64,8 +64,8 @@ public class RecommendationService {
                 if ("🤷‍♀️".equals(emoji)) {
                     recommendedGenres.add("Indie");
                 } else if ("🎉".equals(emoji)) {
-                    recommendedGenres.add("Pop");    // ¡Asegúrate de que esta línea esté presente y se ejecute!
-                    recommendedGenres.add("Dance");   // ¡Asegúrate de que esta línea esté presente y se ejecute!
+                    recommendedGenres.add("Pop");
+                    recommendedGenres.add("Dance");
                 }
             });
         }
