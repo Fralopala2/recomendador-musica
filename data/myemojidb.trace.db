@@ -1,0 +1,186 @@
+2025-07-22 17:45:48.417158+02:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]EMOJI"; se esperaba "EXPLAIN, EXECUTE"
+Syntax error in SQL statement "[*]EMOJI"; expected "EXPLAIN, EXECUTE"; SQL statement:
+EMOJI [42001-232]
+2025-07-22 17:45:53.312875+02:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]EMOJI"; se esperaba "EXPLAIN, EXECUTE"
+Syntax error in SQL statement "[*]EMOJI"; expected "EXPLAIN, EXECUTE"; SQL statement:
+EMOJI [42001-232]
+2025-07-22 18:08:37.830198+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "EMOJI_MOOD" not found (this database is empty); SQL statement:
+INSERT INTO emoji_mood (emoji, mood_description, genre_hint) VALUES ('😄', 'Alegre', 'Pop'), ('🎉', 'Fiesta', 'Dance'), ('🥳', 'Celebración', 'Reggaeton'), ('🌧️', 'Melancólico', 'Balada'), ('😢', 'Triste', 'Blues'), ('💔', 'Desamor', 'Indie'), ('💪', 'Enérgico', 'Rock'), ('⚡', 'Intenso', 'Electrónica'), ('🔥', 'Motivador', 'Hip Hop'), ('🧘‍♀️', 'Relajado', 'Jazz'), ('😎', 'Confiado', 'R&B'), ('🤔', 'Pensativo', 'Clásica'), ('😴', 'Tranquilo', 'Ambient'), ('🤩', 'Emocionado', 'K-Pop'), ('🎸', 'Rebelde', 'Heavy Metal') [42104-232]
+2025-07-22 18:08:56.704357+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "EMOJI_MOOD" not found (this database is empty); SQL statement:
+INSERT INTO emoji_mood (emoji, mood_description, genre_hint) VALUES ('😄', 'Alegre', 'Pop'), ('🎉', 'Fiesta', 'Dance'), ('🥳', 'Celebración', 'Reggaeton'), ('🌧️', 'Melancólico', 'Balada'), ('😢', 'Triste', 'Blues'), ('💔', 'Desamor', 'Indie'), ('💪', 'Enérgico', 'Rock'), ('⚡', 'Intenso', 'Electrónica'), ('🔥', 'Motivador', 'Hip Hop'), ('🧘‍♀️', 'Relajado', 'Jazz'), ('😎', 'Confiado', 'R&B'), ('🤔', 'Pensativo', 'Clásica'), ('😴', 'Tranquilo', 'Ambient'), ('🤩', 'Emocionado', 'K-Pop'), ('🎸', 'Rebelde', 'Heavy Metal') [42104-232]
+2025-07-22 18:09:11.467425+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "EMOJI_MOOD" not found (this database is empty); SQL statement:
+INSERT INTO emoji_mood (emoji, mood_description, genre_hint) VALUES ('😄', 'Alegre', 'Pop'), ('🎉', 'Fiesta', 'Dance'), ('🥳', 'Celebración', 'Reggaeton'), ('🌧️', 'Melancólico', 'Balada'), ('😢', 'Triste', 'Blues'), ('💔', 'Desamor', 'Indie'), ('💪', 'Enérgico', 'Rock'), ('⚡', 'Intenso', 'Electrónica'), ('🔥', 'Motivador', 'Hip Hop'), ('🧘‍♀️', 'Relajado', 'Jazz'), ('😎', 'Confiado', 'R&B'), ('🤔', 'Pensativo', 'Clásica'), ('😴', 'Tranquilo', 'Ambient'), ('🤩', 'Emocionado', 'K-Pop'), ('🎸', 'Rebelde', 'Heavy Metal') [42104-232]
+2025-07-22 18:09:29.244378+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "EMOJI_MOOD" not found (this database is empty); SQL statement:
+INSERT INTO emoji_mood (emoji, mood_description, genre_hint) VALUES ('😄', 'Alegre', 'Pop'), ('🎉', 'Fiesta', 'Dance'), ('🥳', 'Celebración', 'Reggaeton'), ('🌧️', 'Melancólico', 'Balada'), ('😢', 'Triste', 'Blues'), ('💔', 'Desamor', 'Indie'), ('💪', 'Enérgico', 'Rock'), ('⚡', 'Intenso', 'Electrónica'), ('🔥', 'Motivador', 'Hip Hop'), ('🧘‍♀️', 'Relajado', 'Jazz'), ('😎', 'Confiado', 'R&B'), ('🤔', 'Pensativo', 'Clásica'), ('😴', 'Tranquilo', 'Ambient'), ('🤩', 'Emocionado', 'K-Pop'), ('🎸', 'Rebelde', 'Heavy Metal') [42104-232]
+2025-07-22 18:10:21.391617+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "EMOJI_MOOD" not found (this database is empty); SQL statement:
+INSERT INTO emoji_mood (emoji, mood_description, genre_hint) VALUES ('😄', 'Alegre', 'Pop'), ('🎉', 'Fiesta', 'Dance'), ('🥳', 'Celebración', 'Reggaeton'), ('🌧️', 'Melancólico', 'Balada'), ('😢', 'Triste', 'Blues'), ('💔', 'Desamor', 'Indie'), ('💪', 'Enérgico', 'Rock'), ('⚡', 'Intenso', 'Electrónica'), ('🔥', 'Motivador', 'Hip Hop'), ('🧘‍♀️', 'Relajado', 'Jazz'), ('😎', 'Confiado', 'R&B'), ('🤔', 'Pensativo', 'Clásica'), ('😴', 'Tranquilo', 'Ambient'), ('🤩', 'Emocionado', 'K-Pop'), ('🎸', 'Rebelde', 'Heavy Metal') [42104-232]
+2025-07-22 18:11:15.566707+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "EMOJI_MOOD" not found (this database is empty); SQL statement:
+INSERT INTO emoji_mood (emoji, mood_description, genre_hint) VALUES ('😄', 'Alegre', 'Pop'), ('🎉', 'Fiesta', 'Dance'), ('🥳', 'Celebración', 'Reggaeton'), ('🌧️', 'Melancólico', 'Balada'), ('😢', 'Triste', 'Blues'), ('💔', 'Desamor', 'Indie'), ('💪', 'Enérgico', 'Rock'), ('⚡', 'Intenso', 'Electrónica'), ('🔥', 'Motivador', 'Hip Hop'), ('🧘‍♀️', 'Relajado', 'Jazz'), ('😎', 'Confiado', 'R&B'), ('🤔', 'Pensativo', 'Clásica'), ('😴', 'Tranquilo', 'Ambient'), ('🤩', 'Emocionado', 'K-Pop'), ('🎸', 'Rebelde', 'Heavy Metal') [42104-232]
+2025-07-22 18:13:04.074727+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO emoji_mood (emoji, mood_description, genre_hint) VALUES[*]"; se esperaba "ROW (, (, DEFAULT, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"
+Syntax error in SQL statement "INSERT INTO emoji_mood (emoji, mood_description, genre_hint) VALUES[*]"; expected "ROW (, (, DEFAULT, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
+INSERT INTO emoji_mood (emoji, mood_description, genre_hint) VALUES [42001-232]
+2025-07-22 18:13:04.079227+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'😄', 'Alegre', 'Pop'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'😄', 'Alegre', 'Pop'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('😄', 'Alegre', 'Pop'), [42001-232]
+2025-07-22 18:13:04.080727+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'🎉', 'Fiesta', 'Dance'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'🎉', 'Fiesta', 'Dance'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('🎉', 'Fiesta', 'Dance'), [42001-232]
+2025-07-22 18:13:04.082227+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'🥳', 'Celebración', 'Reggaeton'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'🥳', 'Celebración', 'Reggaeton'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('🥳', 'Celebración', 'Reggaeton'), [42001-232]
+2025-07-22 18:13:04.083227+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'🌧️', 'Melancólico', 'Balada'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'🌧️', 'Melancólico', 'Balada'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('🌧️', 'Melancólico', 'Balada'), [42001-232]
+2025-07-22 18:13:04.084227+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'😢', 'Triste', 'Blues'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'😢', 'Triste', 'Blues'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('😢', 'Triste', 'Blues'), [42001-232]
+2025-07-22 18:13:04.085727+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'💔', 'Desamor', 'Indie'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'💔', 'Desamor', 'Indie'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('💔', 'Desamor', 'Indie'), [42001-232]
+2025-07-22 18:13:04.086727+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'💪', 'Enérgico', 'Rock'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'💪', 'Enérgico', 'Rock'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('💪', 'Enérgico', 'Rock'), [42001-232]
+2025-07-22 18:13:04.087727+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'⚡', 'Intenso', 'Electrónica'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'⚡', 'Intenso', 'Electrónica'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('⚡', 'Intenso', 'Electrónica'), [42001-232]
+2025-07-22 18:13:04.088727+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'🔥', 'Motivador', 'Hip Hop'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'🔥', 'Motivador', 'Hip Hop'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('🔥', 'Motivador', 'Hip Hop'), [42001-232]
+2025-07-22 18:13:04.089228+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'🧘\200d♀️', 'Relajado', 'Jazz'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'🧘\200d♀️', 'Relajado', 'Jazz'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('🧘‍♀️', 'Relajado', 'Jazz'), [42001-232]
+2025-07-22 18:13:04.090227+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'😎', 'Confiado', 'R&B'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'😎', 'Confiado', 'R&B'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('😎', 'Confiado', 'R&B'), [42001-232]
+2025-07-22 18:13:04.091045+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'🤔', 'Pensativo', 'Clásica'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'🤔', 'Pensativo', 'Clásica'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('🤔', 'Pensativo', 'Clásica'), [42001-232]
+2025-07-22 18:13:04.091545+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'😴', 'Tranquilo', 'Ambient'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'😴', 'Tranquilo', 'Ambient'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('😴', 'Tranquilo', 'Ambient'), [42001-232]
+2025-07-22 18:13:04.092545+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'🤩', 'Emocionado', 'K-Pop'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'🤩', 'Emocionado', 'K-Pop'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('🤩', 'Emocionado', 'K-Pop'), [42001-232]
+2025-07-22 18:13:04.093045+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'🎸', 'Rebelde', 'Heavy Metal')"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'🎸', 'Rebelde', 'Heavy Metal')"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('🎸', 'Rebelde', 'Heavy Metal') [42001-232]
+2025-07-22 18:13:04.094044+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO app_user (username, email) VALUES[*]"; se esperaba "ROW (, (, DEFAULT, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"
+Syntax error in SQL statement "INSERT INTO app_user (username, email) VALUES[*]"; expected "ROW (, (, DEFAULT, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
+INSERT INTO app_user (username, email) VALUES [42001-232]
+2025-07-22 18:13:04.094545+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'paco', 'paco@example.com'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'paco', 'paco@example.com'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('paco', 'paco@example.com'), [42001-232]
+2025-07-22 18:13:04.095545+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'admin', 'admin@example.com'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'admin', 'admin@example.com'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('admin', 'admin@example.com'), [42001-232]
+2025-07-22 18:13:04.096544+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'musicrobot', 'robot@example.com')"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'musicrobot', 'robot@example.com')"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('musicrobot', 'robot@example.com') [42001-232]
+2025-07-22 18:15:11.158408+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO emoji_mood (emoji, mood_description, genre_hint) VALUES[*]"; se esperaba "ROW (, (, DEFAULT, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"
+Syntax error in SQL statement "INSERT INTO emoji_mood (emoji, mood_description, genre_hint) VALUES[*]"; expected "ROW (, (, DEFAULT, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
+INSERT INTO emoji_mood (emoji, mood_description, genre_hint) VALUES [42001-232]
+2025-07-22 18:15:11.162408+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'😄', 'Alegre', 'Pop'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'😄', 'Alegre', 'Pop'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('😄', 'Alegre', 'Pop'), [42001-232]
+2025-07-22 18:15:11.163908+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'🎉', 'Fiesta', 'Dance'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'🎉', 'Fiesta', 'Dance'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('🎉', 'Fiesta', 'Dance'), [42001-232]
+2025-07-22 18:15:11.165407+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'🥳', 'Celebración', 'Reggaeton'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'🥳', 'Celebración', 'Reggaeton'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('🥳', 'Celebración', 'Reggaeton'), [42001-232]
+2025-07-22 18:15:11.166409+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'🌧️', 'Melancólico', 'Balada'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'🌧️', 'Melancólico', 'Balada'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('🌧️', 'Melancólico', 'Balada'), [42001-232]
+2025-07-22 18:15:11.167408+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'😢', 'Triste', 'Blues'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'😢', 'Triste', 'Blues'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('😢', 'Triste', 'Blues'), [42001-232]
+2025-07-22 18:15:11.168908+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'💔', 'Desamor', 'Indie'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'💔', 'Desamor', 'Indie'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('💔', 'Desamor', 'Indie'), [42001-232]
+2025-07-22 18:15:11.169908+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'💪', 'Enérgico', 'Rock'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'💪', 'Enérgico', 'Rock'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('💪', 'Enérgico', 'Rock'), [42001-232]
+2025-07-22 18:15:11.170908+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'⚡', 'Intenso', 'Electrónica'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'⚡', 'Intenso', 'Electrónica'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('⚡', 'Intenso', 'Electrónica'), [42001-232]
+2025-07-22 18:15:11.171908+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'🔥', 'Motivador', 'Hip Hop'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'🔥', 'Motivador', 'Hip Hop'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('🔥', 'Motivador', 'Hip Hop'), [42001-232]
+2025-07-22 18:15:11.172408+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'🧘\200d♀️', 'Relajado', 'Jazz'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'🧘\200d♀️', 'Relajado', 'Jazz'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('🧘‍♀️', 'Relajado', 'Jazz'), [42001-232]
+2025-07-22 18:15:11.173407+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'😎', 'Confiado', 'R&B'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'😎', 'Confiado', 'R&B'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('😎', 'Confiado', 'R&B'), [42001-232]
+2025-07-22 18:15:11.173909+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'🤔', 'Pensativo', 'Clásica'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'🤔', 'Pensativo', 'Clásica'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('🤔', 'Pensativo', 'Clásica'), [42001-232]
+2025-07-22 18:15:11.174408+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'😴', 'Tranquilo', 'Ambient'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'😴', 'Tranquilo', 'Ambient'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('😴', 'Tranquilo', 'Ambient'), [42001-232]
+2025-07-22 18:15:11.175407+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'🤩', 'Emocionado', 'K-Pop'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'🤩', 'Emocionado', 'K-Pop'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('🤩', 'Emocionado', 'K-Pop'), [42001-232]
+2025-07-22 18:15:11.175908+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'🎸', 'Rebelde', 'Heavy Metal')"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'🎸', 'Rebelde', 'Heavy Metal')"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('🎸', 'Rebelde', 'Heavy Metal') [42001-232]
+2025-07-22 18:15:11.176408+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO app_user (username, email) VALUES[*]"; se esperaba "ROW (, (, DEFAULT, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"
+Syntax error in SQL statement "INSERT INTO app_user (username, email) VALUES[*]"; expected "ROW (, (, DEFAULT, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
+INSERT INTO app_user (username, email) VALUES [42001-232]
+2025-07-22 18:15:11.177408+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'paco', 'paco@example.com'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'paco', 'paco@example.com'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('paco', 'paco@example.com'), [42001-232]
+2025-07-22 18:15:11.178408+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'admin', 'admin@example.com'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'admin', 'admin@example.com'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('admin', 'admin@example.com'), [42001-232]
+2025-07-22 18:15:11.178908+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]'musicrobot', 'robot@example.com')"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]'musicrobot', 'robot@example.com')"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+('musicrobot', 'robot@example.com') [42001-232]

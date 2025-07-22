@@ -4,6 +4,7 @@ import com.ejemplo.musicaemoji.model.EmojiMood;
 import com.ejemplo.musicaemoji.repository.EmojiMoodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional; // Importar Transactional
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -18,14 +19,17 @@ public class RecommendationService {
         this.emojiMoodRepository = emojiMoodRepository;
     }
 
+    @Transactional(readOnly = true) // Añadido para asegurar que la lectura se haga en un contexto transaccional
     public List<EmojiMood> getAllEmojiMoods() {
         return emojiMoodRepository.findAll();
     }
 
+    @Transactional // Asegura que las operaciones de escritura se realicen en una transacción
     public EmojiMood createEmojiMood(EmojiMood emojiMood) {
         return emojiMoodRepository.save(emojiMood);
     }
 
+    @Transactional // Asegura que las operaciones de escritura se realicen en una transacción
     public EmojiMood updateEmojiMood(Long id, EmojiMood updatedEmojiMood) {
         return emojiMoodRepository.findById(id).map(emojiMood -> {
             emojiMood.setEmoji(updatedEmojiMood.getEmoji());
@@ -35,12 +39,14 @@ public class RecommendationService {
         }).orElseThrow(() -> new RuntimeException("EmojiMood not found with id " + id));
     }
 
+    @Transactional // Asegura que las operaciones de escritura se realicen en una transacción
     public void deleteEmojiMood(Long id) {
         emojiMoodRepository.deleteById(id);
     }
 
     public Set<String> recommendGenresByEmojis(String emojisInput) {
         Set<String> recommendedGenres = new HashSet<>();
+        boolean directMatchFound = false; // Bandera para saber si se encontró alguna coincidencia directa
 
         // Primera pasada: Buscar coincidencias directas en la base de datos para cada emoji.
         emojisInput.codePoints().forEach(codePoint -> {
@@ -50,9 +56,14 @@ public class RecommendationService {
             });
         });
 
-        // Segunda pasada: Aplicar lógica de "fallback" específica si NO se encontraron géneros directamente.
-        // Esto asegura que los fallbacks específicos (como para 🤷‍♀️ y 🎉) se consideren si no hay match directo.
-        if (recommendedGenres.isEmpty()) {
+        // Si se encontraron géneros en la primera pasada, actualiza la bandera
+        if (!recommendedGenres.isEmpty()) {
+            directMatchFound = true;
+        }
+
+        // Segunda pasada: Aplicar lógica de "fallback" específica
+        // SOLO SI NO se encontraron géneros directamente en la primera pasada.
+        if (!directMatchFound) {
             emojisInput.codePoints().forEach(codePoint -> {
                 String emoji = new String(Character.toChars(codePoint));
                 if ("🤷‍♀️".equals(emoji)) {
@@ -65,7 +76,7 @@ public class RecommendationService {
         }
 
         // Fallback general: Si después de todas las búsquedas (directas y específicas),
-        // aún no se ha recomendado ningún género y la entrada no estaba vacía.
+        // aún no se ha recomendado ningún género Y la entrada no estaba vacía.
         if (recommendedGenres.isEmpty() && !emojisInput.isEmpty()) {
             recommendedGenres.add("Indie"); // Género por defecto si no se encuentra nada
         }
@@ -165,7 +176,132 @@ public class RecommendationService {
             "Somebody That I Used to Know - Gotye ft. Kimbra (Indie)"
         ));
 
-        // Puedes añadir más géneros y canciones aquí
+        // Canciones de Reggaeton (10 ejemplos) - ¡Añadido!
+        genreSamples.put("Reggaeton", Arrays.asList(
+            "Gasolina - Daddy Yankee (Reggaeton)",
+            "Dura - Daddy Yankee (Reggaeton)",
+            "Con Calma - Daddy Yankee & Snow (Reggaeton)",
+            "Despacito - Luis Fonsi ft. Daddy Yankee (Reggaeton)", // También en Pop
+            "Mi Gente - J Balvin & Willy William (Reggaeton)",
+            "X - Nicky Jam & J Balvin (Reggaeton)",
+            "Calma - Pedro Capó & Farruko (Reggaeton)",
+            "Taki Taki - DJ Snake ft. Selena Gomez, Ozuna, Cardi B (Reggaeton)",
+            "China - Anuel AA, Daddy Yankee, Karol G, Ozuna, J Balvin (Reggaeton)",
+            "Safaera - Bad Bunny, Jowell & Randy, Ñengo Flow (Reggaeton)"
+        ));
+
+        // Canciones de Balada (10 ejemplos) - ¡Añadido!
+        genreSamples.put("Balada", Arrays.asList(
+            "Contigo en la distancia - Christina Aguilera (Balada)",
+            "My Heart Will Go On - Celine Dion (Balada)",
+            "I Will Always Love You - Whitney Houston (Balada)",
+            "Unbreak My Heart - Toni Braxton (Balada)",
+            "Hello - Adele (Balada)",
+            "Someone Like You - Adele (Balada)",
+            "All of Me - John Legend (Balada)",
+            "Perfect - Ed Sheeran (Balada)",
+            "Hallelujah - Leonard Cohen (Balada)",
+            "Can't Help Falling in Love - Elvis Presley (Balada)"
+        ));
+
+        // Canciones de Electrónica (10 ejemplos) - ¡Añadido!
+        genreSamples.put("Electrónica", Arrays.asList(
+            "Strobe - Deadmau5 (Electrónica)",
+            "Levels - Avicii (Electrónica)", // También en Dance
+            "Animals - Martin Garrix (Electrónica)",
+            "Clarity - Zedd ft. Foxes (Electrónica)",
+            "Faded - Alan Walker (Electrónica)",
+            "Alone - Marshmello (Electrónica)",
+            "The Middle - Zedd, Maren Morris, Grey (Electrónica)",
+            "Lean On - Major Lazer & DJ Snake (Electrónica)", // También en Dance
+            "Where Are Ü Now - Skrillex & Diplo ft. Justin Bieber (Electrónica)", // También en Dance
+            "Ghosts 'n' Stuff - Deadmau5 ft. Rob Swire (Electrónica)"
+        ));
+
+        // Canciones de Jazz (10 ejemplos) - ¡Añadido!
+        genreSamples.put("Jazz", Arrays.asList(
+            "Take Five - Dave Brubeck Quartet (Jazz)",
+            "So What - Miles Davis (Jazz)",
+            "My Favorite Things - John Coltrane (Jazz)",
+            "What a Wonderful World - Louis Armstrong (Jazz)",
+            "Fly Me to the Moon - Frank Sinatra (Jazz)",
+            "Summertime - Ella Fitzgerald (Jazz)",
+            "Giant Steps - John Coltrane (Jazz)",
+            "All of Me - Billie Holiday (Jazz)",
+            "Autumn Leaves - Cannonball Adderley (Jazz)",
+            "Blue in Green - Miles Davis (Jazz)"
+        ));
+
+        // Canciones de R&B (10 ejemplos) - ¡Añadido!
+        genreSamples.put("R&B", Arrays.asList(
+            "Crazy in Love - Beyoncé ft. Jay-Z (R&B)",
+            "No Scrubs - TLC (R&B)",
+            "Waterfalls - TLC (R&B)",
+            "Say My Name - Destiny's Child (R&B)",
+            "U Remind Me - Usher (R&B)",
+            "If I Ain't Got You - Alicia Keys (R&B)",
+            "We Belong Together - Mariah Carey (R&B)",
+            "Finesse - Bruno Mars ft. Cardi B (R&B)",
+            "Leave The Door Open - Silk Sonic (R&B)",
+            "Essence - Wizkid ft. Tems (R&B)"
+        ));
+
+        // Canciones de Clásica (10 ejemplos) - ¡Añadido!
+        genreSamples.put("Clásica", Arrays.asList(
+            "Sinfonía No. 5 - Ludwig van Beethoven (Clásica)",
+            "Für Elise - Ludwig van Beethoven (Clásica)",
+            "Eine kleine Nachtmusik - Wolfgang Amadeus Mozart (Clásica)",
+            "Claro de Luna - Claude Debussy (Clásica)",
+            "Las Cuatro Estaciones - Antonio Vivaldi (Clásica)",
+            "Marcha Turca - Wolfgang Amadeus Mozart (Clásica)",
+            "Ave Maria - Franz Schubert (Clásica)",
+            "Canon en Re Mayor - Johann Pachelbel (Clásica)",
+            "Concierto para piano No. 2 - Sergei Rachmaninoff (Clásica)",
+            "O Fortuna (Carmina Burana) - Carl Orff (Clásica)"
+        ));
+
+        // Canciones de Ambient (10 ejemplos) - ¡Añadido!
+        genreSamples.put("Ambient", Arrays.asList(
+            "Ambient 1: Music for Airports - Brian Eno (Ambient)",
+            "Weightless - Marconi Union (Ambient)",
+            "Selected Ambient Works 85-92 - Aphex Twin (Ambient)",
+            "An Ending (Ascent) - Brian Eno (Ambient)",
+            "Reflection - Brian Eno (Ambient)",
+            "Structures From Silence - Steve Roach (Ambient)",
+            "The Pearl - Harold Budd & Brian Eno (Ambient)",
+            "Lux - Brian Eno (Ambient)",
+            "Deep Blue - Biosphere (Ambient)",
+            "Microgravity - The Orb (Ambient)"
+        ));
+
+        // Canciones de K-Pop (10 ejemplos) - ¡Añadido!
+        genreSamples.put("K-Pop", Arrays.asList(
+            "Dynamite - BTS (K-Pop)",
+            "DDU-DU DDU-DU - BLACKPINK (K-Pop)",
+            "Gangnam Style - PSY (K-Pop)",
+            "God's Menu - Stray Kids (K-Pop)",
+            "Psycho - Red Velvet (K-Pop)",
+            "Love Shot - EXO (K-Pop)",
+            "Feel Special - TWICE (K-Pop)",
+            "Boy With Luv - BTS ft. Halsey (K-Pop)",
+            "Kill This Love - BLACKPINK (K-Pop)",
+            "Gee - Girls' Generation (K-Pop)"
+        ));
+
+        // Canciones de Heavy Metal (10 ejemplos) - ¡Añadido!
+        genreSamples.put("Heavy Metal", Arrays.asList(
+            "Master of Puppets - Metallica (Heavy Metal)",
+            "Iron Man - Black Sabbath (Heavy Metal)",
+            "Paranoid - Black Sabbath (Heavy Metal)",
+            "Enter Sandman - Metallica (Heavy Metal)",
+            "Holy Wars... The Punishment Due - Megadeth (Heavy Metal)",
+            "Hallowed Be Thy Name - Iron Maiden (Heavy Metal)",
+            "Ace of Spades - Motörhead (Heavy Metal)",
+            "War Pigs - Black Sabbath (Heavy Metal)",
+            "Breaking the Law - Judas Priest (Heavy Metal)",
+            "Run to the Hills - Iron Maiden (Heavy Metal)"
+        ));
+
 
         for (String genre : genres) {
             songs.addAll(genreSamples.getOrDefault(genre, Collections.emptyList()));
