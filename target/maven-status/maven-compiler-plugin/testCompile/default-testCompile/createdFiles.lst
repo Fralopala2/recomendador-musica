@@ -1,0 +1,5 @@
+com\ejemplo\musicaemoji\controller\RecommendationControllerIntegrationTest.class
+com\ejemplo\musicaemoji\service\RecommendationService.class
+com\ejemplo\musicaemoji\service\UserServiceTest.class
+com\ejemplo\musicaemoji\controller\UserControllerIntegrationTest.class
+com\ejemplo\musicaemoji\RecomendadorMusicaApplicationTests.class
