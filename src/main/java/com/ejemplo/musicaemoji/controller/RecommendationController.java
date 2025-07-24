@@ -1,5 +1,6 @@
 package com.ejemplo.musicaemoji.controller;
 
+import com.ejemplo.musicaemoji.model.RecommendationResponse; // Importa el nuevo DTO
 import com.ejemplo.musicaemoji.service.RecommendationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +24,12 @@ public class RecommendationController {
     }
 
     @GetMapping("/by-emojis")
-    public ResponseEntity<List<String>> getRecommendationsByEmojis(@RequestParam String emojis) {
+    public ResponseEntity<RecommendationResponse> getRecommendationsByEmojis(@RequestParam String emojis) {
         Set<String> genres = recommendationService.recommendGenresByEmojis(emojis);
-        // CORREGIDO: Llamada al nuevo método de Spotify en RecommendationService
         List<String> recommendations = recommendationService.getSpotifyRecommendationsForGenres(genres);
-        return ResponseEntity.ok(recommendations);
+
+        // Crea una instancia del nuevo DTO y la devuelve
+        RecommendationResponse response = new RecommendationResponse(genres, recommendations);
+        return ResponseEntity.ok(response);
     }
 }
