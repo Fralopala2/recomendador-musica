@@ -1,6 +1,6 @@
 package com.ejemplo.musicaemoji.service;
 
-import com.ejemplo.musicaemoji.model.SongDto; // Importa el nuevo SongDto
+import com.ejemplo.musicaemoji.model.SongDto;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -75,7 +75,7 @@ public class SpotifyService {
      * @param limit El número máximo de resultados a devolver.
      * @return Mono<List<SongDto>> que emite una lista de SongDto.
      */
-    public Mono<List<SongDto>> searchSpotify(String query, String type, int limit) { // CAMBIO: Retorna Mono<List<SongDto>>
+    public Mono<List<SongDto>> searchSpotify(String query, String type, int limit) {
         return getAccessToken().flatMap(accessToken ->
             webClient.get()
                     .uri(uriBuilder -> uriBuilder.path("/search")
@@ -87,20 +87,25 @@ public class SpotifyService {
                     .retrieve()
                     .bodyToMono(JsonNode.class)
                     .map(jsonNode -> {
-                        List<SongDto> results = new ArrayList<>(); // CAMBIO: Lista de SongDto
+                        List<SongDto> results = new ArrayList<>();
                         if ("track".equals(type)) {
                             JsonNode tracksNode = jsonNode.path("tracks").path("items");
                             for (JsonNode track : tracksNode) {
                                 String songName = track.path("name").asText();
                                 String artistName = track.path("artists").get(0).path("name").asText();
                                 String spotifyUrl = track.path("external_urls").path("spotify").asText();
-                                String previewUrl = track.path("preview_url").asText(); // Extrae la URL de vista previa
 
-                                // Crea un nuevo SongDto y añádelo a los resultados
+                                // === CAMBIO CLAVE AQUÍ ===
+                                // Obtener la preview_url y asegurar que no sea "null" como String ni vacía
+                                String previewUrl = track.path("preview_url").asText();
+                                if (previewUrl == null || previewUrl.equalsIgnoreCase("null") || previewUrl.isEmpty()) {
+                                    previewUrl = ""; // Asegura que siempre sea una cadena vacía si no hay URL válida
+                                }
+                                // =========================
+
                                 results.add(new SongDto(songName, artistName, spotifyUrl, previewUrl));
                             }
                         }
-                        // Puedes añadir lógica para otros tipos si es necesario, pero actualmente solo buscamos tracks.
                         return results;
                     })
                     .onErrorResume(e -> {
