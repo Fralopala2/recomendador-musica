@@ -98,7 +98,7 @@ public class RecommendationService {
      */
     public List<String> getSpotifyRecommendationsForGenres(Set<String> genres) {
         List<String> allSongs = new ArrayList<>();
-        int songsPerGenre = 5; // Número de canciones a buscar por cada género
+        int songsPerGenre = 10; // Número de canciones a buscar por cada género
 
         for (String genre : genres) {
             // Construye la query de búsqueda para Spotify

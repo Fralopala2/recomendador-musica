@@ -95,7 +95,7 @@ public class SpotifyService {
                     .uri(uriBuilder -> uriBuilder.path("/search")
                             .queryParam("q", URLEncoder.encode(query, StandardCharsets.UTF_8)) // Codifica la query
                             .queryParam("type", type)
-                            .queryParam("limit", limit)
+                            .queryParam("limit", limit) // El límite se pasa directamente
                             .build())
                     .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
                     .retrieve()
