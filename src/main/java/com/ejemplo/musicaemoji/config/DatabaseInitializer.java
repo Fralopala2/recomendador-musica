@@ -36,7 +36,6 @@ public class DatabaseInitializer {
                     new EmojiMood(null, "😴", "Tranquilo", "Ambient"),
                     new EmojiMood(null, "🤩", "Emocionado", "K-Pop"),
                     new EmojiMood(null, "🎸", "Rebelde", "Heavy Metal"),
-                    // Nuevos géneros y emojis (copiados de tu import.sql expandido)
                     new EmojiMood(null, "🤠", "Campestre", "Country"),
                     new EmojiMood(null, "🌲", "Natural", "Folk"),
                     new EmojiMood(null, "🎷", "Sofisticado", "Smooth Jazz"),
@@ -97,11 +96,8 @@ public class DatabaseInitializer {
                     new EmojiMood(null, "⚔️", "Épico Metal", "Power Metal"),
                     new EmojiMood(null, "🤘", "Viking Metal", "Viking Metal"),
                     new EmojiMood(null, "🏴‍☠️", "Pirate Metal", "Pirate Metal"),
-                    new EmojiMood(null, "🏰", "Medieval Metal", "Medieval Metal"),
                     new EmojiMood(null, "🌳", "Pagan Metal", "Pagan Metal"),
                     new EmojiMood(null, "⚡", "Blackened Thrash Metal", "Blackened Thrash Metal"),
-                    new EmojiMood(null, "⚙️", "Technical Death Metal", "Technical Death Metal"),
-                    new EmojiMood(null, "💥", "Brutal Death Metal", "Brutal Death Metal"),
                     new EmojiMood(null, "👊", "Slam Death Metal", "Slam Death Metal"),
                     new EmojiMood(null, "🌀", "Progressive Death Metal", "Progressive Death Metal"),
                     new EmojiMood(null, "🎶", "Melodic Death Metal", "Melodic Death Metal"),
@@ -109,9 +105,7 @@ public class DatabaseInitializer {
                     new EmojiMood(null, "☁️", "Atmospheric Black Metal", "Atmospheric Black Metal"),
                     new EmojiMood(null, "😭", "Depressive Suicidal Black Metal (DSBM)", "Depressive Suicidal Black Metal (DSBM)"),
                     new EmojiMood(null, "🌌", "Post-Black Metal", "Post-Black Metal"),
-                    new EmojiMood(null, "🔪", "Raw Black Metal", "Raw Black Metal"),
                     new EmojiMood(null, "🌫️", "Blackgaze", "Blackgaze"),
-                    new EmojiMood(null, "⚙️", "Industrial Black Metal", "Industrial Black Metal"),
                     new EmojiMood(null, "🌲", "Folk Black Metal", "Folk Black Metal"),
                     new EmojiMood(null, "💣", "War Metal", "War Metal"),
                     new EmojiMood(null, "👊", "Powerviolence", "Powerviolence"),
@@ -127,7 +121,6 @@ public class DatabaseInitializer {
                     new EmojiMood(null, "🕯️", "Traditional Doom Metal", "Traditional Doom Metal"),
                     new EmojiMood(null, "⚔️", "Epic Doom Metal", "Epic Doom Metal"),
                     new EmojiMood(null, "🌲", "Folk Doom Metal", "Folk Doom Metal"),
-                    new EmojiMood(null, "🌀", "Progressive Doom Metal", "Progressive Doom Metal"),
                     new EmojiMood(null, "🧪", "Sludge Doom Metal", "Sludge Doom Metal")
                 );
 
