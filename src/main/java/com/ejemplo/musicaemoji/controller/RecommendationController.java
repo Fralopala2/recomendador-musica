@@ -1,6 +1,7 @@
 package com.ejemplo.musicaemoji.controller;
 
-import com.ejemplo.musicaemoji.model.RecommendationResponse; // Importa el nuevo DTO
+import com.ejemplo.musicaemoji.model.RecommendationResponse;
+import com.ejemplo.musicaemoji.model.SongDto; // Importa SongDto
 import com.ejemplo.musicaemoji.service.RecommendationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,9 +27,8 @@ public class RecommendationController {
     @GetMapping("/by-emojis")
     public ResponseEntity<RecommendationResponse> getRecommendationsByEmojis(@RequestParam String emojis) {
         Set<String> genres = recommendationService.recommendGenresByEmojis(emojis);
-        List<String> recommendations = recommendationService.getSpotifyRecommendationsForGenres(genres);
+        List<SongDto> recommendations = recommendationService.getSpotifyRecommendationsForGenres(genres); // CAMBIO: Ahora devuelve List<SongDto>
 
-        // Crea una instancia del nuevo DTO y la devuelve
         RecommendationResponse response = new RecommendationResponse(genres, recommendations);
         return ResponseEntity.ok(response);
     }

@@ -1,6 +1,7 @@
 package com.ejemplo.musicaemoji.service;
 
 import com.ejemplo.musicaemoji.model.EmojiMood;
+import com.ejemplo.musicaemoji.model.SongDto; // Importa SongDto
 import com.ejemplo.musicaemoji.repository.EmojiMoodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,12 +14,12 @@ import java.util.stream.Collectors;
 public class RecommendationService {
 
     private final EmojiMoodRepository emojiMoodRepository;
-    private final SpotifyService spotifyService; // Inyecta SpotifyService
+    private final SpotifyService spotifyService;
 
     @Autowired
     public RecommendationService(EmojiMoodRepository emojiMoodRepository, SpotifyService spotifyService) {
         this.emojiMoodRepository = emojiMoodRepository;
-        this.spotifyService = spotifyService; // Asigna SpotifyService
+        this.spotifyService = spotifyService;
     }
 
     @Transactional(readOnly = true)
@@ -46,16 +47,10 @@ public class RecommendationService {
         emojiMoodRepository.deleteById(id);
     }
 
-    /**
-     * Recomienda géneros basados en los emojis de entrada.
-     * @param emojisInput Cadena de emojis.
-     * @return Conjunto de géneros recomendados.
-     */
     public Set<String> recommendGenresByEmojis(String emojisInput) {
         Set<String> recommendedGenres = new HashSet<>();
         boolean directMatchFound = false;
 
-        // Busca coincidencias directas de emojis con géneros
         emojisInput.codePoints().forEach(codePoint -> {
             String emoji = new String(Character.toChars(codePoint));
             emojiMoodRepository.findByEmoji(emoji).ifPresent(mood -> {
@@ -67,7 +62,6 @@ public class RecommendationService {
             directMatchFound = true;
         }
 
-        // Lógica de fallback si no se encuentran coincidencias directas o para emojis específicos
         if (!directMatchFound) {
             emojisInput.codePoints().forEach(codePoint -> {
                 String emoji = new String(Character.toChars(codePoint));
@@ -77,11 +71,9 @@ public class RecommendationService {
                     recommendedGenres.add("Pop");
                     recommendedGenres.add("Dance");
                 }
-                // Puedes añadir más lógica de fallback aquí para otros emojis si es necesario
             });
         }
 
-        // Si después de todo no hay géneros recomendados, sugiere "Indie" por defecto.
         if (recommendedGenres.isEmpty() && !emojisInput.isEmpty()) {
             recommendedGenres.add("Indie");
         }
@@ -94,68 +86,54 @@ public class RecommendationService {
     /**
      * Obtiene recomendaciones de canciones de Spotify para los géneros dados.
      * @param genres Conjunto de géneros para los que buscar canciones.
-     * @return Lista de cadenas con el nombre de la canción, artista y URL de Spotify.
+     * @return Lista de SongDto con los detalles de la canción.
      */
-    public List<String> getSpotifyRecommendationsForGenres(Set<String> genres) {
-        List<String> allSongs = new ArrayList<>();
-        int songsPerGenre = 10; // Número de canciones a buscar por cada género
+    public List<SongDto> getSpotifyRecommendationsForGenres(Set<String> genres) { // CAMBIO: Retorna List<SongDto>
+        List<SongDto> allSongs = new ArrayList<>(); // CAMBIO: Lista de SongDto
+        int songsPerGenre = 10;
 
         for (String genre : genres) {
-            // Construye la query de búsqueda para Spotify
             String searchQuery = "genre:" + genre;
 
-            // Llama a SpotifyService para buscar canciones
-            // Usamos .blockOptional() para obtener el resultado de Mono de forma síncrona.
-            // En una aplicación más compleja, podrías querer manejar esto de forma reactiva.
-            List<String> genreSongs = spotifyService.searchSpotify(searchQuery, "track", songsPerGenre)
+            List<SongDto> genreSongs = spotifyService.searchSpotify(searchQuery, "track", songsPerGenre)
                                                     .blockOptional()
                                                     .orElse(Collections.emptyList());
 
             if (genreSongs.isEmpty()) {
-                // Si no se encuentran canciones en Spotify para el género,
-                // puedes añadir un fallback a canciones estáticas o un mensaje.
                 System.out.println("No se encontraron canciones de Spotify para el género: " + genre + ". Usando fallback estático.");
                 allSongs.addAll(getFallbackSongsForGenre(genre, songsPerGenre));
             } else {
                 allSongs.addAll(genreSongs);
             }
         }
-        // Eliminar duplicados si una canción aparece en múltiples búsquedas de género
         return allSongs.stream().distinct().collect(Collectors.toList());
     }
 
     /**
      * Proporciona canciones de fallback estáticas si la búsqueda en Spotify falla o no devuelve resultados.
-     * Esto es útil para asegurar que siempre haya alguna recomendación.
      * @param genre El género para el que se buscan canciones de fallback.
      * @param limit El número de canciones de fallback a devolver.
-     * @return Lista de canciones de fallback.
+     * @return Lista de SongDto de fallback.
      */
-    private List<String> getFallbackSongsForGenre(String genre, int limit) {
-        // Aquí puedes definir un mapa de canciones estáticas como las que tenías antes
-        // para usar como respaldo. Por simplicidad, devolveremos un mensaje genérico.
-        // En una aplicación real, tendrías un mapa grande como el que tenías en el método anterior.
+    private List<SongDto> getFallbackSongsForGenre(String genre, int limit) { // CAMBIO: Retorna List<SongDto>
+        Map<String, List<SongDto>> fallbackGenreSamples = new HashMap<>();
 
-        Map<String, List<String>> fallbackGenreSamples = new HashMap<>();
-        // Puedes copiar aquí el mapa completo de canciones estáticas del método anterior
-        // para tener un fallback robusto. Por ahora, un ejemplo simplificado:
+        // Ejemplos de fallback con SongDto (puedes expandir esto con más géneros y URLs reales si lo deseas)
         fallbackGenreSamples.put("Pop", Arrays.asList(
-            "Blinding Lights - The Weeknd (Pop - Fallback)",
-            "Shape of You - Ed Sheeran (Pop - Fallback)",
-            "Uptown Funk - Mark Ronson ft. Bruno Mars (Pop - Fallback)"
+            new SongDto("Blinding Lights", "The Weeknd", "https://open.spotify.com/track/3PjlD4B4o4J4J4J4J4J4J4", ""),
+            new SongDto("Shape of You", "Ed Sheeran", "https://open.spotify.com/track/7qiZfU4dY1lWllzX7pLGYa", ""),
+            new SongDto("Uptown Funk", "Mark Ronson ft. Bruno Mars", "https://open.spotify.com/track/32OlwWuMpZ6b0aN2RZOeMS", "")
         ));
         fallbackGenreSamples.put("Rock", Arrays.asList(
-            "Bohemian Rhapsody - Queen (Rock - Fallback)",
-            "Stairway to Heaven - Led Zeppelin (Rock - Fallback)",
-            "Smells Like Teen Spirit - Nirvana (Rock - Fallback)"
+            new SongDto("Bohemian Rhapsody", "Queen", "https://open.spotify.com/track/7tFiyTwD0FpgFfppXclCzo", ""),
+            new SongDto("Stairway to Heaven", "Led Zeppelin", "https://open.spotify.com/track/5Pz0y30Jp4J4J4J4J4J4J4", ""),
+            new SongDto("Smells Like Teen Spirit", "Nirvana", "https://open.spotify.com/track/4jC5S555555555555555555", "")
         ));
         // ... añade más géneros de fallback aquí si lo deseas.
 
-        // CORREGIDO: Eliminado el paréntesis extra al final de la línea.
-        List<String> fallbackSongs = fallbackGenreSamples.getOrDefault(genre,
-            Collections.singletonList("No hay recomendaciones de Spotify ni de fallback para " + genre));
+        List<SongDto> fallbackSongs = fallbackGenreSamples.getOrDefault(genre,
+            Collections.singletonList(new SongDto("No hay recomendaciones", "N/A", "", "")));
 
-        // Asegurarse de devolver solo el límite especificado
         return fallbackSongs.stream().limit(limit).collect(Collectors.toList());
     }
 }

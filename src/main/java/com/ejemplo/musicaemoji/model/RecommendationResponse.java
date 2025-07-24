@@ -5,14 +5,14 @@ import java.util.Set;
 
 public class RecommendationResponse {
     private Set<String> genres;
-    private List<String> songs;
+    private List<SongDto> songs; // CAMBIO: Ahora es una lista de SongDto
 
     // Constructor vacío
     public RecommendationResponse() {
     }
 
     // Constructor con todos los campos
-    public RecommendationResponse(Set<String> genres, List<String> songs) {
+    public RecommendationResponse(Set<String> genres, List<SongDto> songs) { // CAMBIO: Tipo de 'songs'
         this.genres = genres;
         this.songs = songs;
     }
@@ -22,7 +22,7 @@ public class RecommendationResponse {
         return genres;
     }
 
-    public List<String> getSongs() {
+    public List<SongDto> getSongs() { // CAMBIO: Tipo de retorno
         return songs;
     }
 
@@ -31,7 +31,7 @@ public class RecommendationResponse {
         this.genres = genres;
     }
 
-    public void setSongs(List<String> songs) {
+    public void setSongs(List<SongDto> songs) { // CAMBIO: Tipo de parámetro
         this.songs = songs;
     }
 }
