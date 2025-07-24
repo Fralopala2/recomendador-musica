@@ -1,10 +1,12 @@
 package com.ejemplo.musicaemoji.controller;
 
-import com.ejemplo.musicaemoji.model.EmojiMood;
 import com.ejemplo.musicaemoji.service.RecommendationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Set;
@@ -22,34 +24,9 @@ public class RecommendationController {
 
     @GetMapping("/by-emojis")
     public ResponseEntity<List<String>> getRecommendationsByEmojis(@RequestParam String emojis) {
-        Set<String> recommendedGenres = recommendationService.recommendGenresByEmojis(emojis);
-        List<String> songs = recommendationService.getSampleSongsForGenres(recommendedGenres);
-        return ResponseEntity.ok(songs);
-    }
-
-    // Nuevo endpoint para listar todos los EmojiMoods
-    @GetMapping("/emojimoods")
-    public ResponseEntity<List<EmojiMood>> getAllEmojiMoods() {
-        List<EmojiMood> emojiMoods = recommendationService.getAllEmojiMoods();
-        return ResponseEntity.ok(emojiMoods);
-    }
-
-    // Otros endpoints CRUD si los tienes (create, update, delete)
-    @PostMapping("/emojimoods")
-    public ResponseEntity<EmojiMood> createEmojiMood(@RequestBody EmojiMood emojiMood) {
-        EmojiMood createdMood = recommendationService.createEmojiMood(emojiMood);
-        return ResponseEntity.ok(createdMood);
-    }
-
-    @PutMapping("/emojimoods/{id}")
-    public ResponseEntity<EmojiMood> updateEmojiMood(@PathVariable Long id, @RequestBody EmojiMood emojiMood) {
-        EmojiMood updatedMood = recommendationService.updateEmojiMood(id, emojiMood);
-        return ResponseEntity.ok(updatedMood);
-    }
-
-    @DeleteMapping("/emojimoods/{id}")
-    public ResponseEntity<Void> deleteEmojiMood(@PathVariable Long id) {
-        recommendationService.deleteEmojiMood(id);
-        return ResponseEntity.noContent().build();
+        Set<String> genres = recommendationService.recommendGenresByEmojis(emojis);
+        // CORREGIDO: Llamada al nuevo método de Spotify en RecommendationService
+        List<String> recommendations = recommendationService.getSpotifyRecommendationsForGenres(genres);
+        return ResponseEntity.ok(recommendations);
     }
 }
