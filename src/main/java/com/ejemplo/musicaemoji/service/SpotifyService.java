@@ -95,13 +95,15 @@ public class SpotifyService {
                                 String artistName = track.path("artists").get(0).path("name").asText();
                                 String spotifyUrl = track.path("external_urls").path("spotify").asText();
 
-                                // === CAMBIO CLAVE AQUÍ ===
                                 // Obtener la preview_url y asegurar que no sea "null" como String ni vacía
                                 String previewUrl = track.path("preview_url").asText();
                                 if (previewUrl == null || previewUrl.equalsIgnoreCase("null") || previewUrl.isEmpty()) {
                                     previewUrl = ""; // Asegura que siempre sea una cadena vacía si no hay URL válida
                                 }
-                                // =========================
+
+                                // === NUEVA LÍNEA DE LOG PARA VERIFICACIÓN ===
+                                System.out.println("DEBUG Backend SpotifyService: previewUrl para '" + songName + "' es: '" + previewUrl + "'");
+                                // ==========================================
 
                                 results.add(new SongDto(songName, artistName, spotifyUrl, previewUrl));
                             }
