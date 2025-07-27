@@ -181,7 +181,6 @@ public class DatabaseInitializer {
                     new EmojiMood(null, "🇪🇸", "Rock en Español", "Rock en Español"),
                     new EmojiMood(null, "🇲🇽", "Norteño", "Norteño"),
                     new EmojiMood(null, "🇧🇷", "Sertanejo", "Sertanejo"),
-                    new EmojiMood(null, "💃", "Forró", "Forró"),
                     new EmojiMood(null, "🎊", "Axé", "Axé"),
                     new EmojiMood(null, "☮️", "Meditation Music", "Meditation Music"),
                     new EmojiMood(null, "🕉️", "Yoga Music", "Yoga Music"),
