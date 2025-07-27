@@ -62,7 +62,7 @@ public class DatabaseInitializer {
                     new EmojiMood(null, "🥁", "Percusivo", "Drum & Bass"),
                     new EmojiMood(null, "🇯🇲", "Caribeño", "Reggae"),
                     new EmojiMood(null, "🌶️", "Picante", "Salsa"),
-                    new EmojiMood(null, "💃🏽", "Apasionado", "Flamenco"),
+                    new EmojiMood(null, "💃", "Apasionado", "Flamenco"),
                     new EmojiMood(null, "🙏", "Espiritual", "Gospel"),
                     new EmojiMood(null, "🎭", "Teatral", "Opera"),
                     new EmojiMood(null, "🌍", "Global", "World Music"),
