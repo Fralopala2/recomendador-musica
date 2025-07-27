@@ -11,5 +11,6 @@ public class SongDto {
     private String name;
     private String artist;
     private String spotifyUrl;
-    private String previewUrl; // Nuevo campo para la URL de vista previa
+    private String previewUrl; // Campo para la URL de vista previa
+    private String recommendedGenre; // <-- NUEVO CAMPO: Género recomendado asociado a la canción
 }

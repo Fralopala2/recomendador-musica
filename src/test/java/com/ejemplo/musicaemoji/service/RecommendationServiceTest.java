@@ -9,12 +9,12 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class RecommendationService {
+public class RecommendationServiceTest {
 
     private final EmojiMoodRepository emojiMoodRepository;
 
     @Autowired
-    public RecommendationService(EmojiMoodRepository emojiMoodRepository) {
+    public RecommendationServiceTest(EmojiMoodRepository emojiMoodRepository) {
         this.emojiMoodRepository = emojiMoodRepository;
     }
 
