@@ -85,7 +85,6 @@ public class DatabaseInitializer {
                     new EmojiMood(null, "💡", "Indie Pop", "Indie Pop"),
                     new EmojiMood(null, "☁️", "Dream Pop", "Dream Pop"),
                     new EmojiMood(null, "🏛️", "Neoclásico", "Neoclassical"),
-                    new EmojiMood(null, "🎼", "Canto", "Choral"),
                     new EmojiMood(null, "🧘‍♂️", "Paz", "New Age"),
                     new EmojiMood(null, "🧖‍♀️", "Relajación", "Spa Music"),
                     new EmojiMood(null, "🍃", "Sonidos Naturales", "Nature Sounds"),
@@ -155,7 +154,6 @@ public class DatabaseInitializer {
                     new EmojiMood(null, "🚀", "Speedcore", "Speedcore"),
                     new EmojiMood(null, "💻", "Digital Hardcore", "Digital Hardcore"),
                     new EmojiMood(null, "🕹️", "Bitpop", "Bitpop"),
-                    new EmojiMood(null, "🎞️", "Film Score", "Film Score"),
                     new EmojiMood(null, "⛪", "Choral", "Choral"),
                     new EmojiMood(null, "🎶", "A Cappella", "A Cappella"),
                     new EmojiMood(null, "💈", "Barbershop", "Barbershop"),
@@ -187,7 +185,6 @@ public class DatabaseInitializer {
                     new EmojiMood(null, "📖", "Storytelling Music", "Storytelling Music"),
                     new EmojiMood(null, "🤣", "Parody Music", "Parody Music"),
                     new EmojiMood(null, "👽", "Filk Music", "Filk Music"),
-                    new EmojiMood(null, "🐺", "Viking Metal", "Viking Metal"),
                     new EmojiMood(null, "☠️", "Pirate Metal", "Pirate Metal"),
                     new EmojiMood(null, "🛠️", "Technical Death Metal", "Technical Death Metal")
                 );
