@@ -1,6 +1,6 @@
 package com.ejemplo.musicaemoji.service;
 
-import com.ejemplo.musicaemoji.model.SongDto;
+import com.ejemplo.musicaemoji.model.SongDto; // Importar SongDto
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -73,15 +73,22 @@ public class SpotifyService {
      * @param query La cadena de búsqueda.
      * @param type El tipo de elemento a buscar (ej. "track").
      * @param limit El número máximo de resultados a devolver.
+     * @param market El código de país ISO 3166-1 alpha-2 para filtrar los resultados por mercado.
+     * Si es null o vacío, se usará "ES" (España) por defecto.
+     * @param genreHint El género que se usó para la búsqueda (para incluirlo en SongDto).
      * @return Mono<List<SongDto>> que emite una lista de SongDto.
      */
-    public Mono<List<SongDto>> searchSpotify(String query, String type, int limit) {
+    public Mono<List<SongDto>> searchSpotify(String query, String type, int limit, String market, String genreHint) { // <-- CAMBIO: Añadido 'market' y 'genreHint'
+        // Usar "ES" como mercado por defecto si no se especifica o es inválido
+        final String effectiveMarket = (market != null && !market.trim().isEmpty()) ? market : "ES";
+
         return getAccessToken().flatMap(accessToken ->
             webClient.get()
                     .uri(uriBuilder -> uriBuilder.path("/search")
                             .queryParam("q", URLEncoder.encode(query, StandardCharsets.UTF_8))
                             .queryParam("type", type)
                             .queryParam("limit", limit)
+                            .queryParam("market", effectiveMarket) // <-- CAMBIO CLAVE AQUÍ: Añadido el filtro de mercado
                             .build())
                     .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
                     .retrieve()
@@ -95,17 +102,15 @@ public class SpotifyService {
                                 String artistName = track.path("artists").get(0).path("name").asText();
                                 String spotifyUrl = track.path("external_urls").path("spotify").asText();
 
-                                // Obtener la preview_url y asegurar que no sea "null" como String ni vacía
                                 String previewUrl = track.path("preview_url").asText();
                                 if (previewUrl == null || previewUrl.equalsIgnoreCase("null") || previewUrl.isEmpty()) {
-                                    previewUrl = ""; // Asegura que siempre sea una cadena vacía si no hay URL válida
+                                    previewUrl = "";
                                 }
 
-                                // === NUEVA LÍNEA DE LOG PARA VERIFICACIÓN ===
                                 System.out.println("DEBUG Backend SpotifyService: previewUrl para '" + songName + "' es: '" + previewUrl + "'");
-                                // ==========================================
 
-                                results.add(new SongDto(songName, artistName, spotifyUrl, previewUrl));
+                                // Ahora creamos un SongDto con el género recomendado
+                                results.add(new SongDto(songName, artistName, spotifyUrl, previewUrl, genreHint)); // <-- CAMBIO: Pasando 5 argumentos
                             }
                         }
                         return results;
