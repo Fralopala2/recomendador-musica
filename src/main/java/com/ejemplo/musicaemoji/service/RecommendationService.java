@@ -41,7 +41,7 @@ public class RecommendationService {
      * @return Un Mono que emite ResponseEntity con RecommendationResponse
      * que contiene la lista de SongDto y el conjunto de géneros recomendados.
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked") // Suprimir la advertencia de "unchecked cast" para Mono.zip
     public Mono<RecommendationResponse> getRecommendationsByEmojis(String emojis) {
         if (emojis == null || emojis.trim().isEmpty()) {
             // Especificar tipos genéricos para emptyList y emptySet
@@ -80,6 +80,10 @@ public class RecommendationService {
                                 .filter(genre -> !genre.isEmpty())
                                 .collect(Collectors.toSet());
 
+        // === NUEVA LÍNEA DE LOG ===
+        System.out.println("DEBUG RecommendationService: Géneros finales recomendados antes de Spotify: " + finalRecommendedGenres);
+        // =========================
+
         if (finalRecommendedGenres.isEmpty()) {
             return Mono.just(new RecommendationResponse(Collections.<SongDto>emptyList(), Collections.<String>emptySet()));
         }
@@ -94,7 +98,6 @@ public class RecommendationService {
             List<SongDto> allSongs = new ArrayList<>();
             for (Object result : results) {
                 if (result instanceof List) {
-                    // === CORRECCIÓN AQUÍ: Cast seguro con comprobación de tipo ===
                     allSongs.addAll((List<SongDto>) result);
                 }
             }
@@ -139,7 +142,79 @@ public class RecommendationService {
             new SongDto("Stairway to Heaven", "Led Zeppelin", "https://open.spotify.com/track/5Pz0y30Jp4J4J4J4J4J4J4", "https://p.scdn.co/mp3-preview/4d0f0d2c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e8", "Rock"),
             new SongDto("Smells Like Teen Spirit", "Nirvana", "https://open.spotify.com/track/4jC5S555555555555555555", "https://p.scdn.co/mp3-preview/6d0f0d2c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e8", "Rock")
         ));
-        // ... (Añade aquí el resto de tus géneros de fallback con SongDto de 5 argumentos)
+        // Añade aquí el resto de tus géneros de fallback con SongDto de 5 argumentos
+        fallbackGenreSamples.put("Indie", Arrays.asList(
+            new SongDto("Riptide", "Vance Joy", "https://open.spotify.com/track/7yq4Qj7KGxetoBWPbc5nfP", "https://p.scdn.co/mp3-preview/a9d8d6d5c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e", "Indie"),
+            new SongDto("Sweater Weather", "The Neighbourhood", "https://open.spotify.com/track/2QjF0D8UkXyswXJ9txtpY2", "https://p.scdn.co/mp3-preview/b9d8d6d5c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e", "Indie")
+        ));
+        fallbackGenreSamples.put("Dance", Arrays.asList(
+            new SongDto("Titanium", "David Guetta ft. Sia", "https://open.spotify.com/track/2fE8FqXQd8X8X8X8X8X8X8", "https://p.scdn.co/mp3-preview/c9d8d6d5c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e", "Dance"),
+            new SongDto("Levels", "Avicii", "https://open.spotify.com/track/5Pz0y30Jp4J4J4J4J4J4J4", "https://p.scdn.co/mp3-preview/d9d8d6d5c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e", "Dance")
+        ));
+        fallbackGenreSamples.put("Blues", Arrays.asList(
+            new SongDto("The Thrill Is Gone", "B.B. King", "https://open.spotify.com/track/4tQy6p5X0Q5X0Q5X0Q5X0Q", "https://p.scdn.co/mp3-preview/e9d8d6d5c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e", "Blues")
+        ));
+        fallbackGenreSamples.put("Metal", Arrays.asList(
+            new SongDto("Master of Puppets", "Metallica", "https://open.spotify.com/track/2tQy6p5X0Q5X0Q5X0Q5X0Q", "https://p.scdn.co/mp3-preview/f9d8d6d5c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e", "Metal")
+        ));
+        fallbackGenreSamples.put("Ambient", Arrays.asList(
+            new SongDto("Weightless", "Marconi Union", "https://open.spotify.com/track/5Pz0y30Jp4J4J4J4J4J4J4", "https://p.scdn.co/mp3-preview/10d8d6d5c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e", "Ambient")
+        ));
+        fallbackGenreSamples.put("R&B", Arrays.asList(
+            new SongDto("Crazy in Love", "Beyoncé ft. Jay-Z", "https://open.spotify.com/track/2tQy6p5X0Q5X0Q5X0Q5X0Q", "https://p.scdn.co/mp3-preview/20d8d6d5c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e", "R&B")
+        ));
+        fallbackGenreSamples.put("Sad Pop", Arrays.asList(
+            new SongDto("Someone You Loved", "Lewis Capaldi", "https://open.spotify.com/track/4tQy6p5X0Q5X0Q5X0Q5X0Q", "https://p.scdn.co/mp3-preview/30d8d6d5c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e", "Sad Pop")
+        ));
+        fallbackGenreSamples.put("Electronic", Arrays.asList(
+            new SongDto("Strobe", "deadmau5", "https://open.spotify.com/track/5Pz0y30Jp4J4J4J4J4J4J4", "https://p.scdn.co/mp3-preview/40d8d6d5c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e", "Electronic")
+        ));
+        fallbackGenreSamples.put("Lo-Fi", Arrays.asList(
+            new SongDto("Coffee Shop", "Lo-Fi Beats", "https://open.spotify.com/track/2tQy6p5X0Q5X0Q5X0Q5X0Q", "https://p.scdn.co/mp3-preview/50d8d6d5c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e", "Lo-Fi")
+        ));
+        fallbackGenreSamples.put("Reggae", Arrays.asList(
+            new SongDto("No Woman, No Cry", "Bob Marley & The Wailers", "https://open.spotify.com/track/4tQy6p5X0Q5X0Q5X0Q5X0Q", "https://p.scdn.co/mp3-preview/60d8d6d5c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e", "Reggae")
+        ));
+        fallbackGenreSamples.put("Gothic Metal", Arrays.asList(
+            new SongDto("Nemo", "Nightwish", "https://open.spotify.com/track/5Pz0y30Jp4J4J4J4J4J4J4", "https://p.scdn.co/mp3-preview/70d8d6d5c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e", "Gothic Metal")
+        ));
+        fallbackGenreSamples.put("EDM", Arrays.asList(
+            new SongDto("Animals", "Martin Garrix", "https://open.spotify.com/track/2tQy6p5X0Q5X0Q5X0Q5X0Q", "https://p.scdn.co/mp3-preview/80d8d6d5c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e", "EDM")
+        ));
+        fallbackGenreSamples.put("New Age", Arrays.asList(
+            new SongDto("Orinoco Flow", "Enya", "https://open.spotify.com/track/4tQy6p5X0Q5X0Q5X0Q5X0Q", "https://p.scdn.co/mp3-preview/90d8d6d5c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e", "New Age")
+        ));
+        fallbackGenreSamples.put("Classic Rock", Arrays.asList(
+            new SongDto("Sweet Child O' Mine", "Guns N' Roses", "https://open.spotify.com/track/5Pz0y30Jp4J4J4J4J4J4J4", "https://p.scdn.co/mp3-preview/a0d8d6d5c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e", "Classic Rock")
+        ));
+        fallbackGenreSamples.put("Latin Pop", Arrays.asList(
+            new SongDto("Despacito", "Luis Fonsi ft. Daddy Yankee", "https://open.spotify.com/track/2tQy6p5X0Q5X0Q5X0Q5X0Q", "https://p.scdn.co/mp3-preview/b0d8d6d5c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e", "Latin Pop")
+        ));
+        fallbackGenreSamples.put("Classical", Arrays.asList(
+            new SongDto("Clair de Lune", "Claude Debussy", "https://open.spotify.com/track/4tQy6p5X0Q5X0Q5X0Q5X0Q", "https://p.scdn.co/mp3-preview/c0d8d6d5c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e", "Classical")
+        ));
+        fallbackGenreSamples.put("Game Soundtrack", Arrays.asList(
+            new SongDto("Megalovania", "Toby Fox", "https://open.spotify.com/track/5Pz0y30Jp4J4J4J4J4J4J4", "https://p.scdn.co/mp3-preview/d0d8d6d5c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e", "Game Soundtrack")
+        ));
+        fallbackGenreSamples.put("Acoustic", Arrays.asList(
+            new SongDto("I'm Yours", "Jason Mraz", "https://open.spotify.com/track/2tQy6p5X0Q5X0Q5X0Q5X0Q", "https://p.scdn.co/mp3-preview/e0d8d6d5c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e", "Acoustic")
+        ));
+        fallbackGenreSamples.put("Trap", Arrays.asList(
+            new SongDto("Harlem Shake", "Baauer", "https://open.spotify.com/track/4tQy6p5X0Q5X0Q5X0Q5X0Q", "https://p.scdn.co/mp3-preview/f0d8d6d5c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e", "Trap")
+        ));
+        fallbackGenreSamples.put("Gospel", Arrays.asList(
+            new SongDto("Oh Happy Day", "Edwin Hawkins Singers", "https://open.spotify.com/track/5Pz0y30Jp4J4J4J4J4J4J4", "https://p.scdn.co/mp3-preview/11d8d6d5c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e", "Gospel")
+        ));
+        fallbackGenreSamples.put("Chillwave", Arrays.asList(
+            new SongDto("Feel It All Around", "Washed Out", "https://open.spotify.com/track/2tQy6p5X0Q5X0Q5X0Q5X0Q", "https://p.scdn.co/mp3-preview/21d8d6d5c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e", "Chillwave")
+        ));
+        fallbackGenreSamples.put("Hard Rock", Arrays.asList(
+            new SongDto("Highway to Hell", "AC/DC", "https://open.spotify.com/track/4tQy6p5X0Q5X0Q5X0Q5X0Q", "https://p.scdn.co/mp3-preview/31d8d6d5c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e", "Hard Rock")
+        ));
+        fallbackGenreSamples.put("Various", Arrays.asList(
+            new SongDto("Happy", "Pharrell Williams", "https://open.spotify.com/track/5Pz0y30Jp4J4J4J4J4J4J4", "https://p.scdn.co/mp3-preview/41d8d6d5c2c06e2e5e8e8e8e8e8e8e8e8e8e8e8e", "Pop") // Ejemplo de canción variada
+        ));
+
 
         for (String genre : genres) {
             List<SongDto> genreFallback = fallbackGenreSamples.getOrDefault(genre, Collections.emptyList());
