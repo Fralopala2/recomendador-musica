@@ -29,4 +29,7 @@
     !**/src/test/**/build/
 
     ### VS Code ###
-    .vscode/    
+    .vscode/
+
+    ### Firebase ###
+    src/main/resources/firebase/    

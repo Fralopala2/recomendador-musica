@@ -59,9 +59,10 @@ public class SpotifyService {
                 .bodyToMono(JsonNode.class)
                 .map(jsonNode -> {
                     String accessToken = jsonNode.get("access_token").asText();
-                    long expiresIn = jsonNode.get("expires_in").asLong();
-                    long newExpiryTime = System.currentTimeMillis() + (expiresIn * 1000) - 5000;
+                    long expiresIn = jsonNode.get("expires_in").asLong(); // Tiempo en segundos
+                    long newExpiryTime = System.currentTimeMillis() + (expiresIn * 1000) - 5000; // 5 segundos de margen
 
+                    // Almacena el nuevo token y su tiempo de expiración en la cache
                     tokenCache.put("spotify_access_token", accessToken);
                     tokenExpiry.put("spotify_access_token", newExpiryTime);
                     return accessToken;
@@ -78,21 +79,21 @@ public class SpotifyService {
      * @param genreHint El género que se usó para la búsqueda (para incluirlo en SongDto).
      * @return Mono<List<SongDto>> que emite una lista de SongDto.
      */
-    public Mono<List<SongDto>> searchSpotify(String query, String type, int limit, String market, String genreHint) { // <-- CAMBIO: Añadido 'market' y 'genreHint'
+    public Mono<List<SongDto>> searchSpotify(String query, String type, int limit, String market, String genreHint) {
         // Usar "ES" como mercado por defecto si no se especifica o es inválido
         final String effectiveMarket = (market != null && !market.trim().isEmpty()) ? market : "ES";
 
         return getAccessToken().flatMap(accessToken ->
             webClient.get()
                     .uri(uriBuilder -> uriBuilder.path("/search")
-                            .queryParam("q", URLEncoder.encode(query, StandardCharsets.UTF_8))
+                            .queryParam("q", URLEncoder.encode(query, StandardCharsets.UTF_8)) // Codifica la query
                             .queryParam("type", type)
-                            .queryParam("limit", limit)
-                            .queryParam("market", effectiveMarket) // <-- CAMBIO CLAVE AQUÍ: Añadido el filtro de mercado
+                            .queryParam("limit", limit) // El límite se pasa directamente
+                            .queryParam("market", effectiveMarket) // Añadido el filtro de mercado
                             .build())
                     .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
                     .retrieve()
-                    .bodyToMono(JsonNode.class)
+                    .bodyToMono(JsonNode.class) // Convierte la respuesta a un objeto JsonNode
                     .map(jsonNode -> {
                         List<SongDto> results = new ArrayList<>();
                         if ("track".equals(type)) {
@@ -104,24 +105,26 @@ public class SpotifyService {
 
                                 String previewUrl = track.path("preview_url").asText();
                                 if (previewUrl == null || previewUrl.equalsIgnoreCase("null") || previewUrl.isEmpty()) {
-                                    previewUrl = "";
+                                    previewUrl = ""; // Asegura que previewUrl nunca sea null o "null"
                                 }
 
                                 System.out.println("DEBUG Backend SpotifyService: previewUrl para '" + songName + "' es: '" + previewUrl + "'");
 
-                                // Ahora creamos un SongDto con el género recomendado
-                                results.add(new SongDto(songName, artistName, spotifyUrl, previewUrl, genreHint)); // <-- CAMBIO: Pasando 5 argumentos
+                                // Creamos un SongDto con los 5 argumentos
+                                results.add(new SongDto(songName, artistName, spotifyUrl, previewUrl, genreHint));
                             }
                         }
                         return results;
                     })
                     .onErrorResume(e -> {
+                        // Manejo de errores en la búsqueda
                         System.err.println("Error searching Spotify: " + e.getMessage());
-                        return Mono.just(Collections.emptyList());
+                        return Mono.just(Collections.emptyList()); // Devuelve una lista vacía en caso de error
                     })
         ).onErrorResume(e -> {
+            // Manejo de errores al obtener el token
             System.err.println("Error getting Spotify access token: " + e.getMessage());
-            return Mono.just(Collections.emptyList());
+            return Mono.just(Collections.emptyList()); // Devuelve una lista vacía
         });
     }
 }

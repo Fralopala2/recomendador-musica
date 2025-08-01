@@ -46,6 +46,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.google.firebase</groupId>
+            <artifactId>firebase-admin</artifactId>
+            <version>9.3.0</version>
+        </dependency>
         <!-- NUEVAS DEPENDENCIAS PARA SPOTIFY -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

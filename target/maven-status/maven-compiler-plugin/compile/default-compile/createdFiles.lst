@@ -1,10 +1,10 @@
 com\ejemplo\musicaemoji\model\User.class
+com\ejemplo\musicaemoji\repository\EmojiMoodRepository.class
 com\ejemplo\musicaemoji\RecomendadorMusicaApplication$1.class
 com\ejemplo\musicaemoji\service\UserService.class
 com\ejemplo\musicaemoji\repository\UserRepository.class
 com\ejemplo\musicaemoji\model\EmojiMood.class
 com\ejemplo\musicaemoji\RecomendadorMusicaApplication.class
-com\ejemplo\musicaemoji\repository\EmojiMoodRepository.class
 com\ejemplo\musicaemoji\service\RecommendationService.class
 com\ejemplo\musicaemoji\controller\RecommendationController.class
 com\ejemplo\musicaemoji\controller\UserController.class
