@@ -5,37 +5,38 @@ import com.google.cloud.firestore.Firestore;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
+import org.springframework.beans.factory.annotation.Value; // Importa Value para inyectar la variable de entorno
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource; // Importa esta clase
 
+import java.io.ByteArrayInputStream; // Para leer el String como InputStream
 import java.io.IOException;
-import java.io.InputStream; // Usa InputStream para leer el recurso
+import java.io.InputStream;
 
 @Configuration
 public class FirebaseConfig {
 
-    // Nombre del archivo JSON de tu clave de servicio de Firebase
-    // Asegúrate de que este archivo esté en src/main/resources/firebase/
-    // Y que el nombre sea exacto.
-    private static final String SERVICE_ACCOUNT_KEY_FILENAME = "music-recommender-db1-firebase-adminsdk-fbsvc-535e1ef730.json"; // <-- ¡CAMBIA ESTO AL NOMBRE REAL DE TU ARCHIVO!
+    // Inyecta el contenido completo del JSON de la clave de servicio desde una variable de entorno
+    // Render inyectará el valor de la variable de entorno FIREBASE_SERVICE_ACCOUNT_KEY
+    @Value("${FIREBASE_SERVICE_ACCOUNT_KEY}") // Nombre de la variable de entorno en Render
+    private String firebaseServiceAccountKeyJson;
+
     private static final String FIREBASE_PROJECT_ID = "music-recommender-db1"; // <-- ¡TU ID DE PROYECTO DE FIREBASE!
 
     @Bean
     public FirebaseApp initializeFirebaseApp() throws IOException {
-        // Carga el archivo de la clave de servicio desde el classpath
-        // Esto es crucial para que funcione cuando la aplicación se empaqueta en un JAR
-        InputStream serviceAccount = new ClassPathResource("firebase/" + SERVICE_ACCOUNT_KEY_FILENAME).getInputStream();
+        // Convierte el String JSON de la variable de entorno en un InputStream
+        InputStream serviceAccount = new ByteArrayInputStream(firebaseServiceAccountKeyJson.getBytes());
 
         // Configura las opciones de Firebase
         FirebaseOptions options = FirebaseOptions.builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                .setProjectId(FIREBASE_PROJECT_ID) // Establece el ID del proyecto explícitamente
+                .setProjectId(FIREBASE_PROJECT_ID)
                 .build();
 
         // Inicializa la aplicación Firebase
-        if (FirebaseApp.getApps().isEmpty()) { // Evita inicializar si ya existe una instancia
-            System.out.println("Inicializando Firebase App para el proyecto: " + FIREBASE_PROJECT_ID);
+        if (FirebaseApp.getApps().isEmpty()) {
+            System.out.println("Inicializando Firebase App para el proyecto: " + FIREBASE_PROJECT_ID + " desde variable de entorno.");
             return FirebaseApp.initializeApp(options);
         } else {
             System.out.println("Firebase App ya inicializada para el proyecto: " + FIREBASE_PROJECT_ID);
