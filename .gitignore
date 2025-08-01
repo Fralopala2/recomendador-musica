@@ -57,7 +57,7 @@ logs/
 *.properties
 *.yml
 *.json
-!src/main/resources/application.properties # Mantener application.properties si debe ser rastreado
+!src/main/resources/application.properties # Mantene application.properties si debe ser rastreado
 
 # Directorio de la clave de servicio de Firebase (IGNORADO)
 # Esto asegura que tu archivo JSON de Firebase no se suba al repositorio.
