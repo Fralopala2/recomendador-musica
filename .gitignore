@@ -26,6 +26,34 @@ buildNumber.properties
 .settings/
 .springBeans
 .sts4-cache
+# General ignores for build outputs and IDE files
+
+# Archivos de ayuda y documentación
+HELP.md
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+*.jar
+*.war
+*.class
+
+# Eclipse
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache
 
 # IntelliJ IDEA
 .idea/
@@ -33,7 +61,20 @@ buildNumber.properties
 *.iml
 *.ipr
 out/
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
 
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
 # NetBeans
 /nbproject/private/
 /nbbuild/
