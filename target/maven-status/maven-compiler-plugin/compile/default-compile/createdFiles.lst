@@ -1,8 +1,13 @@
 com\ejemplo\musicaemoji\model\User.class
+com\ejemplo\musicaemoji\config\FirebaseConfig.class
 com\ejemplo\musicaemoji\repository\EmojiMoodRepository.class
+com\ejemplo\musicaemoji\model\RecommendationResponse.class
+com\ejemplo\musicaemoji\service\SpotifyService.class
 com\ejemplo\musicaemoji\RecomendadorMusicaApplication$1.class
 com\ejemplo\musicaemoji\service\UserService.class
 com\ejemplo\musicaemoji\repository\UserRepository.class
+com\ejemplo\musicaemoji\model\SongDto.class
+com\ejemplo\musicaemoji\config\DatabaseInitializer.class
 com\ejemplo\musicaemoji\model\EmojiMood.class
 com\ejemplo\musicaemoji\RecomendadorMusicaApplication.class
 com\ejemplo\musicaemoji\service\RecommendationService.class
