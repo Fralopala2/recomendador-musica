@@ -1,35 +1,74 @@
-    HELP.md
-    target/
-    !**/src/main/**/target/
-    !**/src/test/**/target/
+# General ignores for build outputs and IDE files
 
-    ### STS ###
-    .apt_generated
-    .classpath
-    .factorypath
-    .project
-    .settings
-    .springBeans
-    .sts4-cache
+# Archivos de ayuda y documentación
+HELP.md
 
-    ### IntelliJ IDEA ###
-    .idea
-    *.iws
-    *.iml
-    *.ipr
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+*.jar
+*.war
+*.class
 
-    ### NetBeans ###
-    /nbproject/private/
-    /nbbuild/
-    /dist/
-    /nbdist/
-    /.nb-gradle/
-    build/
-    !**/src/main/**/build/
-    !**/src/test/**/build/
+# Eclipse
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache
 
-    ### VS Code ###
-    .vscode/
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
 
-    ### Firebase ###
-    src/main/resources/firebase/    
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+logs/
+
+# Archivos de la base de datos (para desarrollo local)
+*.mv.db
+*.trace.db
+
+# Archivos de configuración y claves sensibles
+*.properties
+*.yml
+*.json
+!src/main/resources/application.properties # Mantener application.properties si debe ser rastreado
+
+# Directorio de la clave de servicio de Firebase (IGNORADO)
+# Esto asegura que tu archivo JSON de Firebase no se suba al repositorio.
+src/main/resources/firebase/
+
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db
+
+# Otros archivos temporales
+tmp/
+*.tmp
+*.bak
+*.swp
