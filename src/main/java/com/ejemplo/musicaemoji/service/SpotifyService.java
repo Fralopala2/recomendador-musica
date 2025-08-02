@@ -1,6 +1,6 @@
 package com.ejemplo.musicaemoji.service;
 
-import com.ejemplo.musicaemoji.model.SongDto; // Importar SongDto
+import com.ejemplo.musicaemoji.model.SongDto;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -59,10 +59,9 @@ public class SpotifyService {
                 .bodyToMono(JsonNode.class)
                 .map(jsonNode -> {
                     String accessToken = jsonNode.get("access_token").asText();
-                    long expiresIn = jsonNode.get("expires_in").asLong(); // Tiempo en segundos
-                    long newExpiryTime = System.currentTimeMillis() + (expiresIn * 1000) - 5000; // 5 segundos de margen
+                    long expiresIn = jsonNode.get("expires_in").asLong();
+                    long newExpiryTime = System.currentTimeMillis() + (expiresIn * 1000) - 5000;
 
-                    // Almacena el nuevo token y su tiempo de expiración en la cache
                     tokenCache.put("spotify_access_token", accessToken);
                     tokenExpiry.put("spotify_access_token", newExpiryTime);
                     return accessToken;
@@ -74,26 +73,20 @@ public class SpotifyService {
      * @param query La cadena de búsqueda.
      * @param type El tipo de elemento a buscar (ej. "track").
      * @param limit El número máximo de resultados a devolver.
-     * @param market El código de país ISO 3166-1 alpha-2 para filtrar los resultados por mercado.
-     * Si es null o vacío, se usará "ES" (España) por defecto.
      * @param genreHint El género que se usó para la búsqueda (para incluirlo en SongDto).
      * @return Mono<List<SongDto>> que emite una lista de SongDto.
      */
-    public Mono<List<SongDto>> searchSpotify(String query, String type, int limit, String market, String genreHint) {
-        // Usar "ES" como mercado por defecto si no se especifica o es inválido
-        final String effectiveMarket = (market != null && !market.trim().isEmpty()) ? market : "ES";
-
+    public Mono<List<SongDto>> searchSpotify(String query, String type, int limit, String genreHint) { // CAMBIO: Añadido genreHint
         return getAccessToken().flatMap(accessToken ->
             webClient.get()
                     .uri(uriBuilder -> uriBuilder.path("/search")
-                            .queryParam("q", URLEncoder.encode(query, StandardCharsets.UTF_8)) // Codifica la query
+                            .queryParam("q", URLEncoder.encode(query, StandardCharsets.UTF_8))
                             .queryParam("type", type)
-                            .queryParam("limit", limit) // El límite se pasa directamente
-                            .queryParam("market", effectiveMarket) // Añadido el filtro de mercado
+                            .queryParam("limit", limit)
                             .build())
                     .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
                     .retrieve()
-                    .bodyToMono(JsonNode.class) // Convierte la respuesta a un objeto JsonNode
+                    .bodyToMono(JsonNode.class)
                     .map(jsonNode -> {
                         List<SongDto> results = new ArrayList<>();
                         if ("track".equals(type)) {
@@ -105,26 +98,24 @@ public class SpotifyService {
 
                                 String previewUrl = track.path("preview_url").asText();
                                 if (previewUrl == null || previewUrl.equalsIgnoreCase("null") || previewUrl.isEmpty()) {
-                                    previewUrl = ""; // Asegura que previewUrl nunca sea null o "null"
+                                    previewUrl = "";
                                 }
 
                                 System.out.println("DEBUG Backend SpotifyService: previewUrl para '" + songName + "' es: '" + previewUrl + "'");
 
-                                // Creamos un SongDto con los 5 argumentos
-                                results.add(new SongDto(songName, artistName, spotifyUrl, previewUrl, genreHint));
+                                // Ahora creamos un SongDto con el ID nulo (Firestore lo generaría si se guardara) y el género recomendado
+                                results.add(new SongDto(null, songName, artistName, spotifyUrl, previewUrl, genreHint)); // CAMBIO: Añadido null y genreHint
                             }
                         }
                         return results;
                     })
                     .onErrorResume(e -> {
-                        // Manejo de errores en la búsqueda
                         System.err.println("Error searching Spotify: " + e.getMessage());
-                        return Mono.just(Collections.emptyList()); // Devuelve una lista vacía en caso de error
+                        return Mono.just(Collections.emptyList());
                     })
         ).onErrorResume(e -> {
-            // Manejo de errores al obtener el token
             System.err.println("Error getting Spotify access token: " + e.getMessage());
-            return Mono.just(Collections.emptyList()); // Devuelve una lista vacía
+            return Mono.just(Collections.emptyList());
         });
     }
 }

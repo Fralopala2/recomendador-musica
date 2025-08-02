@@ -8,7 +8,7 @@
         <version>3.5.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.ejemplo.musicaemoji</groupId> <!-- He ajustado el groupId a com.ejemplo.musicaemoji para consistencia -->
+    <groupId>com.ejemplo.musicaemoji</groupId>
     <artifactId>recomendador-musica</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>recomendador-musica</name>
@@ -17,10 +17,11 @@
         <java.version>21</java.version>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
+        <!--
+        ELIMINADA: spring-boot-starter-data-jpa
+        Ya no usamos JPA ni bases de datos relacionales (como PostgreSQL o H2)
+        porque estamos migrando a Firebase Firestore.
+        -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -31,11 +32,10 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <scope>runtime</scope>
-        </dependency>
+        <!--
+        ELIMINADA: postgresql
+        Ya no necesitamos el driver de PostgreSQL.
+        -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -51,7 +51,7 @@
             <artifactId>firebase-admin</artifactId>
             <version>9.3.0</version>
         </dependency>
-        <!-- NUEVAS DEPENDENCIAS PARA SPOTIFY -->
+        <!-- Dependencias para Spotify (WebClient y Jackson) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
@@ -78,7 +78,8 @@
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                            <version>${lombok.version}</version>
+                            <!-- ELIMINADO: <version>${lombok.version}</version>
+                                La versión de Lombok ya está gestionada por el parent de Spring Boot. -->
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
