@@ -1,7 +1,7 @@
 package com.ejemplo.musicaemoji.config;
 
 import com.ejemplo.musicaemoji.model.EmojiMood;
-import com.ejemplo.musicaemoji.repository.EmojiMoodFirestoreRepository; // Importa el nuevo repositorio
+import com.ejemplo.musicaemoji.repository.EmojiMoodFirestoreRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,14 +13,12 @@ import java.util.List;
 public class DatabaseInitializer {
 
     @Bean
-    CommandLineRunner initDatabase(EmojiMoodFirestoreRepository repository) { // Inyecta el nuevo repositorio
+    CommandLineRunner initDatabase(EmojiMoodFirestoreRepository repository) {
         return args -> {
-            // Verifica si la colección emojiMoods ya tiene datos en Firestore
             if (repository.count() == 0) {
                 System.out.println("Cargando datos iniciales de emojis y géneros en Firestore...");
 
                 List<EmojiMood> initialData = Arrays.asList(
-                    // Aquí el ID es null porque Firestore lo generará
                     new EmojiMood(null, "😄", "Alegre", "Pop"),
                     new EmojiMood(null, "🎉", "Fiesta", "Dance"),
                     new EmojiMood(null, "🥳", "Celebración", "Reggaeton"),
@@ -37,7 +35,7 @@ public class DatabaseInitializer {
                     new EmojiMood(null, "🤩", "Emocionado", "K-Pop"),
                     new EmojiMood(null, "🎸", "Rebelde", "Heavy Metal"),
                     new EmojiMood(null, "🤠", "Campestre", "Country"),
-                    new EmojiMood(null, "🌲", "Natural", "Folk"),
+                    new EmojiMood(null, "🌳", "Natural", "Folk"),
                     new EmojiMood(null, "🎷", "Sofisticado", "Smooth Jazz"),
                     new EmojiMood(null, "🎺", "Marcha", "Big Band"),
                     new EmojiMood(null, "🎤", "Vocal", "Soul"),
@@ -72,7 +70,7 @@ public class DatabaseInitializer {
                     new EmojiMood(null, "🎬", "Cinemático", "Film Score"),
                     new EmojiMood(null, "👶", "Infantil", "Childrens Music"),
                     new EmojiMood(null, "🎄", "Navideño", "Holiday Music"),
-                    new EmojiMood(null, "🗣️", "Narrativo", "Spoken Word"),
+                    new EmojiMood(null, "🗣️", "Narrativo", "Sp spoken Word"),
                     new EmojiMood(null, "😂", "Cómico", "Comedy"),
                     new EmojiMood(null, "💸", "Moderno", "Trap"),
                     new EmojiMood(null, "🔪", "Intenso Urbano", "Drill"),
@@ -93,42 +91,41 @@ public class DatabaseInitializer {
                     new EmojiMood(null, "📚", "Educativo", "Educational Music"),
                     new EmojiMood(null, "🤪", "Novedad", "Novelty Songs"),
                     new EmojiMood(null, "✊", "Protesta", "Political Hip Hop"),
-                    new EmojiMood(null, "⚔️", "Épico Metal", "Power Metal"),
-                    new EmojiMood(null, "🤘", "Viking Metal", "Viking Metal"),
+                    new EmojiMood(null, "👑", "Épico Metal", "Power Metal"),
+                    new EmojiMood(null, "🪓", "Viking Metal", "Viking Metal"),
                     new EmojiMood(null, "🏴‍☠️", "Pirate Metal", "Pirate Metal"),
-                    new EmojiMood(null, "🏰", "Medieval Metal", "Medieval Metal"),
-                    new EmojiMood(null, "🌳", "Pagan Metal", "Pagan Metal"),
-                    new EmojiMood(null, "⚡", "Blackened Thrash Metal", "Blackened Thrash Metal"),
-                    new EmojiMood(null, "⚙️", "Technical Death Metal", "Technical Death Metal"),
-                    new EmojiMood(null, "💥", "Brutal Death Metal", "Brutal Death Metal"),
+                    new EmojiMood(null, "🛡️", "Medieval Metal", "Medieval Metal"),
+                    new EmojiMood(null, "🌲", "Pagan Metal", "Pagan Metal"),
+                    new EmojiMood(null, "😈", "Blackened Thrash Metal", "Blackened Thrash Metal"),
+                    new EmojiMood(null, "🔬", "Technical Death Metal", "Technical Death Metal"),
+                    new EmojiMood(null, "🩸", "Brutal Death Metal", "Brutal Death Metal"),
                     new EmojiMood(null, "👊", "Slam Death Metal", "Slam Death Metal"),
-                    new EmojiMood(null, "🌀", "Progressive Death Metal", "Progressive Death Metal"),
-                    new EmojiMood(null, "🎶", "Melodic Death Metal", "Melodic Death Metal"),
+                    new EmojiMood(null, "🧩", "Progressive Death Metal", "Progressive Death Metal"),
+                    new EmojiMood(null, "🎼", "Melodic Death Metal", "Melodic Death Metal"),
                     new EmojiMood(null, "⚰️", "Funeral Doom Metal", "Funeral Doom Metal"),
-                    new EmojiMood(null, "☁️", "Atmospheric Black Metal", "Atmospheric Black Metal"),
+                    new EmojiMood(null, "🌬️", "Atmospheric Black Metal", "Atmospheric Black Metal"),
                     new EmojiMood(null, "😭", "Depressive Suicidal Black Metal (DSBM)", "Depressive Suicidal Black Metal (DSBM)"),
-                    new EmojiMood(null, "🌌", "Post-Black Metal", "Post-Black Metal"),
+                    new EmojiMood(null, "🌠", "Post-Black Metal", "Post-Black Metal"),
                     new EmojiMood(null, "🔪", "Raw Black Metal", "Raw Black Metal"),
                     new EmojiMood(null, "🌫️", "Blackgaze", "Blackgaze"),
-                    new EmojiMood(null, "⚙️", "Industrial Black Metal", "Industrial Black Metal"),
-                    new EmojiMood(null, "🌲", "Folk Black Metal", "Folk Black Metal"),
+                    new EmojiMood(null, "🏭", "Industrial Black Metal", "Industrial Black Metal"),
+                    new EmojiMood(null, "🌾", "Folk Black Metal", "Folk Black Metal"),
                     new EmojiMood(null, "💣", "War Metal", "War Metal"),
-                    new EmojiMood(null, "👊", "Powerviolence", "Powerviolence"),
-                    new EmojiMood(null, "💥", "No Wave", "No Wave"),
+                    new EmojiMood(null, "💢", "Powerviolence", "Powerviolence"),
+                    new EmojiMood(null, "🚫", "No Wave", "No Wave"),
                     new EmojiMood(null, "🎨", "Free Improvisation", "Free Improvisation"),
                     new EmojiMood(null, "🧪", "Experimental Rock", "Experimental Rock"),
                     new EmojiMood(null, "🤘", "Avant-garde Metal", "Avant-garde Metal"),
                     new EmojiMood(null, "嗡", "Drone Metal", "Drone Metal"),
-                    new EmojiMood(null, "🧪", "Sludgecore", "Sludgecore"),
-                    new EmojiMood(null, "🌌", "Post-Metal", "Post-Metal"),
+                    new EmojiMood(null, "🧫", "Sludgecore", "Sludgecore"),
+                    new EmojiMood(null, "🌉", "Post-Metal", "Post-Metal"),
                     new EmojiMood(null, "🌿", "Stoner Doom", "Stoner Doom"),
                     new EmojiMood(null, "🍄", "Psychedelic Doom", "Psychedelic Doom"),
                     new EmojiMood(null, "🕯️", "Traditional Doom Metal", "Traditional Doom Metal"),
                     new EmojiMood(null, "⚔️", "Epic Doom Metal", "Epic Doom Metal"),
-                    new EmojiMood(null, "🌲", "Folk Doom Metal", "Folk Doom Metal"),
-                    new EmojiMood(null, "🌀", "Progressive Doom Metal", "Progressive Doom Metal"),
-                    new EmojiMood(null, "🧪", "Sludge Doom Metal", "Sludge Doom Metal"),
-                    new EmojiMood(null, "⚰️", "Funeral Doom Metal", "Funeral Doom Metal")
+                    new EmojiMood(null, "🍂", "Folk Doom Metal", "Folk Doom Metal"),
+                    new EmojiMood(null, "🌪️", "Progressive Doom Metal", "Progressive Doom Metal"),
+                    new EmojiMood(null, "🧪", "Sludge Doom Metal", "Sludge Doom Metal")
                 );
 
                 repository.saveAll(initialData);
