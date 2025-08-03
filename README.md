@@ -1,6 +1,6 @@
 # Recomendador de Música por Emoji 🎶
 
-Este proyecto es una aplicación de recomendación de música que permite a los usuarios obtener sugerencias de canciones basadas en los emojis que introducen. Combina un potente backend de Spring Boot con un frontend moderno de Android usando Jetpack Compose, integrándose con la API de Spotify para ofrecer resultados relevantes.
+Este proyecto es una aplicación de recomendación de música que permite a los usuarios obtener sugerencias de canciones basadas en los emojis que introducen. Combina un potente backend de Spring Boot con una app Android moderna.
 
 ## ✨ Características
 
@@ -10,7 +10,7 @@ Este proyecto es una aplicación de recomendación de música que permite a los 
 - **Enlaces Directos a Spotify**: Abre la canción completa en la aplicación de Spotify con un solo toque
 - **Recomendaciones de Géneros**: Muestra el/los género(s) musical(es) asociado(s) a los emojis introducidos
 - **Splash Screen Animada**: Una pantalla de carga inicial con el logo de la aplicación
-- **Backend Escalable**: Desarrollado con Spring Boot para manejar la lógica de negocio y la comunicación con Spotify
+- **Backend Escalable**: Desarrollado con Spring Boot y **Firebase Firestore** como base de datos NoSQL (sin SQL relacional)
 - **Frontend Moderno**: Aplicación Android nativa construida con Jetpack Compose para una interfaz de usuario fluida y reactiva
 
 ## 🛠️ Tecnologías Utilizadas
@@ -18,10 +18,9 @@ Este proyecto es una aplicación de recomendación de música que permite a los 
 ### Backend (Spring Boot)
 - Java 21
 - Spring Boot 3.x
-- Spring Data JPA
 - Spring WebFlux (para llamadas no bloqueantes a la API de Spotify)
-- H2 Database (para desarrollo local y pruebas)
-- PostgreSQL (para despliegue en producción, ej. Render)
+- **Google Firebase Firestore** (base de datos NoSQL principal)
+- [firebase-admin](https://mvnrepository.com/artifact/com.google.firebase/firebase-admin) (SDK Java)
 - Lombok
 - Maven
 - API de Spotify
@@ -41,7 +40,8 @@ Este proyecto es una aplicación de recomendación de música que permite a los 
 - Java Development Kit (JDK) 21 o superior
 - Maven (para el backend)
 - Android Studio (para el frontend)
-- **Cuenta de desarrollador de Spotify**: Necesitarás crear una aplicación en el [Dashboard de Desarrolladores de Spotify](https://developer.spotify.com/dashboard) para obtener tu Client ID y Client Secret
+- **Cuenta de desarrollador de Spotify**: Necesitarás crear una aplicación en el [Dashboard de Desarrolladores de Spotify](https://developer.spotify.com/dashboard) para obtener tu Client ID y Client Secret.
+- **Proyecto de Firebase**: Debes crear un proyecto en [Firebase Console](https://console.firebase.google.com/), habilitar Firestore y generar una clave de servicio (JSON).
 
 ### 1. Configuración del Backend
 
@@ -51,62 +51,74 @@ Este proyecto es una aplicación de recomendación de música que permite a los 
    cd recomendador-musica
    ```
 
-2. **Configura las credenciales de Spotify**:
-   - Crea un archivo `src/main/resources/application.properties` (si no existe) o edita el existente
+2. **Configura las credenciales de Spotify y Firebase**:
+   - Crea o edita `src/main/resources/application.properties`
    - Añade tus credenciales de Spotify:
-   ```properties
-   spotify.client.id=TU_CLIENT_ID_DE_SPOTIFY
-   spotify.client.secret=TU_CLIENT_SECRET_DE_SPOTIFY
-   ```
+     ```properties
+     spotify.client.id=TU_CLIENT_ID_DE_SPOTIFY
+     spotify.client.secret=TU_CLIENT_SECRET_DE_SPOTIFY
+     ```
+   - Exporta como variable de entorno el contenido del JSON de la clave de servicio de Firebase:
+     ```bash
+     export FIREBASE_SERVICE_ACCOUNT_KEY='{"type":...}' # TODO: Pega aquí el JSON completo como string
+     ```
+   - En despliegues Render o similares, usa la variable de entorno `FIREBASE_SERVICE_ACCOUNT_KEY`.
 
-3. **Configuración de la Base de Datos (H2 para desarrollo local)**:
-   El proyecto está configurado para usar H2 Database en memoria por defecto (`application.properties`). No necesitas configuración adicional para empezar. Los datos iniciales de emojis se cargarán desde `src/main/resources/import.sql`.
-
-4. **Construye el proyecto Maven**:
+3. **Construye el proyecto Maven**:
    ```bash
    ./mvnw clean install
    ```
 
-5. **Ejecuta la aplicación Spring Boot**:
+4. **Ejecuta la aplicación Spring Boot**:
    ```bash
    ./mvnw spring-boot:run
    ```
-
-El backend se iniciará en `http://localhost:8080`.
+   El backend se iniciará en `http://localhost:8080`.
 
 ### 2. Configuración del Frontend (Aplicación Android)
 
 1. **Abre el proyecto en Android Studio**:
-   En Android Studio, selecciona "Open an existing Android Studio project" y navega a la carpeta `recomendador-musica/android-app`.
+   - Selecciona "Open an existing Android Studio project" y navega a `recomendador-musica/android-app`.
 
 2. **Añade el logo a drawable**:
-   Copia el archivo `logo_compressed.png` (que se encuentra en la raíz de tu repositorio o en la carpeta assets si la tienes) a la carpeta `android-app/app/src/main/res/drawable`.
+   - Copia el archivo `logo_compressed.png` a `android-app/app/src/main/res/drawable`.
 
 3. **Configura la URL base del backend**:
-   - Abre `android-app/app/src/main/java/com/ejemplo/musicaemoji/androidapp/api/MusicApi.kt`
-   - Modifica la `BASE_URL` en el objeto `RetrofitInstance`:
-     - **Para emulador de Android**: `private const val BASE_URL = "http://10.0.2.2:8080/"`
-     - **Para dispositivo Android físico**: Reemplaza `TU_IP_LOCAL` con la dirección IP de tu máquina de desarrollo (ej. `http://192.168.1.X:8080/`)
-     - **Para backend desplegado en la nube**: Reemplaza `TU_DOMINIO_PUBLICO` con la URL de tu servicio desplegado (ej. `https://tu-servicio.onrender.com/`)
+   - Edita `android-app/app/src/main/java/com/ejemplo/musicaemoji/androidapp/api/MusicApi.kt`
+   - Modifica la constante `BASE_URL` según tu caso:
+     - Emulador: `http://10.0.2.2:8080/`
+     - Dispositivo físico: `http://<TU_IP_LOCAL>:8080/`
+     - Backend en la nube: `https://<TU_DOMINIO_PUBLICO>/`
 
 4. **Sincroniza y ejecuta**:
-   - Sincroniza el proyecto Gradle (File → Sync Project with Gradle Files)
-   - Ejecuta la aplicación en un emulador o dispositivo Android
+   - Sincroniza Gradle y ejecuta la app en emulador o dispositivo.
 
-## ☁️ Despliegue en la Nube (Render)
+### 3. Dockerización del Backend
 
-El backend de Spring Boot puede ser fácilmente desplegado en plataformas como Render:
+Se incluye un archivo `Dockerfile` para facilitar el despliegue:
+
+```dockerfile
+FROM openjdk:21-jdk-slim
+WORKDIR /app
+COPY mvnw .
+COPY .mvn .mvn
+COPY pom.xml .
+COPY src src
+RUN chmod +x mvnw && ./mvnw clean install -DskipTests
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "target/recomendador-musica-0.0.1-SNAPSHOT.jar"]
+```
+
+### 4. Despliegue en la Nube (Render)
 
 1. Conecta tu repositorio de GitHub a Render
 2. Crea un nuevo servicio web y selecciona tu repositorio
-3. **Configura las variables de entorno en Render**:
-   - `SPOTIFY_CLIENT_ID`: Tu Client ID de Spotify
-   - `SPOTIFY_CLIENT_SECRET`: Tu Client Secret de Spotify
-   - `DATABASE_URL`: La URL de conexión a tu base de datos PostgreSQL (Render la inyectará automáticamente si usas su servicio de PostgreSQL)
-   - `SPRING_PROFILES_ACTIVE`: `production` (o el perfil que uses para producción)
-
-4. Asegúrate de que tu `pom.xml` incluya la dependencia de PostgreSQL y que `application.properties` esté configurado para PostgreSQL si no usas H2 en producción
-5. Asegúrate de que tu Dockerfile sea correcto para construir y ejecutar tu aplicación Spring Boot en Render
+3. Configura variables de entorno:
+   - `SPOTIFY_CLIENT_ID`
+   - `SPOTIFY_CLIENT_SECRET`
+   - `FIREBASE_SERVICE_ACCOUNT_KEY`
+   - `SPRING_PROFILES_ACTIVE=production`
+4. El Dockerfile está preparado para el despliegue de la app.
 
 ## 📄 Licencia
 
@@ -131,3 +143,11 @@ Las contribuciones son bienvenidas. Por favor, abre un issue o envía un pull re
 ## 📧 Contacto
 
 [pacoaldev@gmail.com]
+
+---
+
+**Notas:**
+- El backend ahora usa exclusivamente Firestore para almacenar y consultar los datos de emojis y géneros.
+- Ya no se usa ni H2 ni PostgreSQL.
+- Para ver detalles de la implementación Firestore, revisa los archivos [`FirebaseConfig.java`](https://github.com/Fralopala2/recomendador-musica/blob/main/src/main/java/com/ejemplo/musicaemoji/config/FirebaseConfig.java) y [`EmojiMoodFirestoreRepository.java`](https://github.com/Fralopala2/recomendador-musica/blob/main/src/main/java/com/ejemplo/musicaemoji/repository/EmojiMoodFirestoreRepository.java).
+- Consulta la [búsqueda de código en GitHub](https://github.com/Fralopala2/recomendador-musica/search?q=firestore) para más información.
