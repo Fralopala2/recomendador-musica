@@ -76,13 +76,14 @@ public class SpotifyService {
      * @param genreHint El género que se usó para la búsqueda (para incluirlo en SongDto).
      * @return Mono<List<SongDto>> que emite una lista de SongDto.
      */
-    public Mono<List<SongDto>> searchSpotify(String query, String type, int limit, String genreHint) { // CAMBIO: Añadido genreHint
+    public Mono<List<SongDto>> searchSpotify(String query, String type, int limit, String genreHint) {
         return getAccessToken().flatMap(accessToken ->
             webClient.get()
                     .uri(uriBuilder -> uriBuilder.path("/search")
                             .queryParam("q", URLEncoder.encode(query, StandardCharsets.UTF_8))
                             .queryParam("type", type)
                             .queryParam("limit", limit)
+                            .queryParam("market", "ES") // <-- Añadido para forzar catálogo de España
                             .build())
                     .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
                     .retrieve()
@@ -103,8 +104,8 @@ public class SpotifyService {
 
                                 System.out.println("DEBUG Backend SpotifyService: previewUrl para '" + songName + "' es: '" + previewUrl + "'");
 
-                                // Ahora creamos un SongDto con el ID nulo (Firestore lo generaría si se guardara) y el género recomendado
-                                results.add(new SongDto(null, songName, artistName, spotifyUrl, previewUrl, genreHint)); // CAMBIO: Añadido null y genreHint
+                                // SongDto: (String id, String nombre, String artista, String spotifyUrl, String previewUrl, String genreHint)
+                                results.add(new SongDto(null, songName, artistName, spotifyUrl, previewUrl, genreHint));
                             }
                         }
                         return results;
